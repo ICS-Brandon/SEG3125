@@ -1,0 +1,28 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "title": "question 1"
+    },
+    {
+      "id": 2,
+      "title": "question 2"
+    },
+    {
+      "id": 3,
+      "title": "question 3"
+    }
+  ],
+  "choices": [
+    {
+      "id": 1,
+      "body": "this is choice a",
+      "questionId": 1
+    },
+    {
+      "id": 2,
+      "body": "this is choice b",
+      "questionId": 1
+    }
+  ]
+}

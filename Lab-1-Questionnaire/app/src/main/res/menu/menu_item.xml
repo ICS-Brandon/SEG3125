@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navCreateQuiz"
+        android:title="Create a Quiz"
+        />
+
+    <item
+        android:id="@+id/navSettings"
+        android:title="Settings"
+        />
+
+    <item
+        android:id="@+id/navAbout"
+        android:title="About Us"
+        />
+
+    <item
+        android:id="@+id/navContact"
+        android:title="Contact us"
+        />
+
+    <item
+        android:id="@+id/navHelp"
+        android:title="Need Help?"
+        />
+
+
+</menu>

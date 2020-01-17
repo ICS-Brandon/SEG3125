@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    tools:openDrawer="end"
+    android:id="@+id/drawer"
+    android:background="@color/c1"
+    android:layout_height="match_parent"
+    tools:context=".WelcomeScreen">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@color/c1"
+            />
+
+        <TextView
+            android:id="@+id/Test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Questionnaire Quizzer"
+            />
+
+        <TextView
+            android:id="@+id/WelcomeTagHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Made By Brandon Wilson"
+            android:textSize="6dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            />
+
+        <TextView
+            android:id="@+id/QSelectHome"
+            android:text="Select The Quiz You Would Like To Take"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+
+        <Spinner
+            android:id="@+id/QHomeSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <Button
+            android:id="@+id/QSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Let's Go!"
+            android:background="@drawable/lets_go"
+            android:onClick="startQuiz"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="300dp"
+            />
+
+
+
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:id="@+id/navigationView"
+        app:menu="@menu/menu_item"
+        app:headerLayout="@layout/nav_header"
+        android:background="@color/c3"
+        android:layout_gravity="start"
+        app:itemTextColor="#fff"
+        />
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
