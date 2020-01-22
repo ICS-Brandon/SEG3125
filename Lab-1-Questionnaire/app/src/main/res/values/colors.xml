@@ -7,4 +7,7 @@
     <color name="c2">#666f78</color>
     <color name="c3">#353e47</color>
     <color name="c1Accent">#37958d</color>
+    <color name="c1AccentShadow">#80306B66</color>
+    <color name="BlueContrast">#47949D</color>
+    <color name="BlueShadow">#802F818C</color>
 </resources>
