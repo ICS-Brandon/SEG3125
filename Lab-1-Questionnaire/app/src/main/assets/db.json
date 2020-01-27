@@ -1,28 +1,49 @@
 {
-  "questions": [
+  "quizzes" : [
     {
       "id": 1,
-      "title": "question 1"
+      "name":"quiz 1",
+      "questions" : [
+          {
+            "id": 1,
+            "title": "question 1",
+            "answer": 1,
+            "choices": [
+              {
+                "id": 1,
+                "body": "this is choice a"
+              },
+              {
+                "id": 2,
+                "body": "this is choice b"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "title": "question 2",
+            "answer": 1,
+            "choices": [
+              {
+                "id": 1,
+                "body": "this is choice b"
+              },
+              {
+                "id": 2,
+                "body": "this is choice b"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "title": "question 3",
+            "answer": 2
+          }
+        ]
     },
     {
       "id": 2,
-      "title": "question 2"
-    },
-    {
-      "id": 3,
-      "title": "question 3"
-    }
-  ],
-  "choices": [
-    {
-      "id": 1,
-      "body": "this is choice a",
-      "questionId": 1
-    },
-    {
-      "id": 2,
-      "body": "this is choice b",
-      "questionId": 1
+      "name": "quiz 2"
     }
   ]
 }
