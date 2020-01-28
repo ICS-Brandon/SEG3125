@@ -8,7 +8,7 @@
             "id": 1,
             "title": "question 1",
             "answer": 1,
-            "choices": [
+            "options": [
               {
                 "id": 1,
                 "body": "this is choice a"
@@ -23,7 +23,7 @@
             "id": 2,
             "title": "question 2",
             "answer": 1,
-            "choices": [
+            "options": [
               {
                 "id": 1,
                 "body": "this is choice b"
@@ -37,13 +37,34 @@
           {
             "id": 3,
             "title": "question 3",
-            "answer": 2
+            "answer": 2,
+            "options": [
+              {
+                "id": 1,
+                "body": "This is choice A"
+              }
+            ]
           }
         ]
     },
     {
       "id": 2,
-      "name": "quiz 2"
+      "name": "quiz 2",
+      "questions": [
+        {
+          "id": 1,
+          "title": "test",
+          "answer": 1,
+          "options": [
+
+            {
+              "id": 1,
+              "body": "This is Choice A"
+            }
+
+          ]
+        }
+      ]
     }
   ]
 }

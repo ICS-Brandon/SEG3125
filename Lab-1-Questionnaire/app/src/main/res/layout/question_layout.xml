@@ -7,16 +7,18 @@
     android:background="@color/c1"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="354dp"
-        android:layout_height="250dp"
+    <TextView
+        android:id="@+id/QViewAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="150dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
-        android:visibility="invisible"
-        app:cardElevation="0dp"
+        android:padding="5dp"
+        android:elevation="20dp"
+        android:background="@drawable/text_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/QViewQNum" />
@@ -25,12 +27,9 @@
         android:id="@+id/QViewQNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="335dp"
-        android:layout_marginRight="335dp"
-        android:text="Question #x"
-        android:padding="5dp"
         android:background="@drawable/top_box"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="5dp"
+        android:text="Question #x"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:onClick="op1Select"
             android:background="@drawable/radiogroup" />
 
         <RadioButton
@@ -69,6 +69,7 @@
             android:text="Test2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="op2Select"
             android:background="@drawable/radiogroup"
             android:layout_margin="10dp" />
 
@@ -76,6 +77,7 @@
             android:id="@+id/Option3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="op3Select"
             android:background="@drawable/radiogroup"
             android:layout_margin="10dp" />
 
@@ -83,6 +85,7 @@
             android:id="@+id/Option4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="op4Select"
             android:background="@drawable/radiogroup"
             android:layout_margin="10dp" />
 
@@ -90,6 +93,7 @@
             android:id="@+id/Option5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="op5Select"
             android:background="@drawable/radiogroup"
             android:layout_margin="10dp" />
 
@@ -133,7 +137,7 @@
             android:id="@+id/QViewRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="7"
+            android:text="0"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="443dp" />
 
@@ -157,10 +161,10 @@
             android:text="Incorrect" />
 
         <TextView
-            android:id="@+id/QViewW"
+            android:id="@+id/QViewWrong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2" />
+            android:text="0" />
     </LinearLayout>
 
 
