@@ -1,18 +1,15 @@
 package com.example.lab1questionnaire;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.JsonReader;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,20 +17,21 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class QuestionScreen extends AppCompatActivity {
 
-    String quizName;
-    int quizPos;
-    RadioButton opt1,opt2,opt3,opt4,opt5;
-    RadioGroup rGroup;
-    TextView qView,answer,qRight,qWrong,viewQNum;
-    ArrayList<Question> qList = new ArrayList<>();
-    ArrayList<RadioButton> rBList = new ArrayList<>();
-    UserScore user;
-    AlertDialog.Builder qDialog;
-
+    private Button submitButton;
+    private int quizPos;
+    private RadioButton opt1,opt2,opt3,opt4,opt5;
+    private RadioGroup rGroup;
+    private TextView qView,qRight,qWrong,viewQNum;
+    private ArrayList<Question> qList = new ArrayList<>();
+    private ArrayList<RadioButton> rBList = new ArrayList<>();
+    private UserInfo user;
+    private Quiz currentQuiz;
+    private static DecimalFormat roundTwo = new DecimalFormat("##.##");
 
     @Override
     protected void onCreate(Bundle savedInstance){
@@ -55,22 +53,15 @@ public class QuestionScreen extends AppCompatActivity {
 
 
         qView = findViewById(R.id.QViewQ);
-        answer = findViewById(R.id.QViewAnswer);
-        answer.setVisibility(View.INVISIBLE);
         qRight = findViewById(R.id.QViewRight);
         qWrong = findViewById(R.id.QViewWrong);
         viewQNum = findViewById(R.id.QViewQNum);
-
-        qDialog = new AlertDialog.Builder(this);
+        submitButton = findViewById(R.id.SubmitButton);
 
         Intent receive = getIntent();
-        quizName = receive.getStringExtra("quizName");
         quizPos = receive.getIntExtra("quizPos",0);
 
-        user = new UserScore(quizName);
-
-        read_Json();
-        updateQuestion(0);
+        init_Quiz();
     }
 
     public void updateQuestion(int qPos){
@@ -101,7 +92,7 @@ public class QuestionScreen extends AppCompatActivity {
         }
     }
 
-    public void read_Json(){
+    public void init_Quiz(){
         String json;
         try {
             InputStream is = getAssets().open("db.json");
@@ -116,6 +107,7 @@ public class QuestionScreen extends AppCompatActivity {
             JSONArray jArray = jObj.getJSONArray("quizzes");
             JSONObject quizObj = jArray.getJSONObject(quizPos);
             JSONArray qArray = quizObj.getJSONArray("questions");
+            user = new UserInfo(quizObj.getString("name"),quizObj.getInt("pass"));
 
             for(int i = 0; i< qArray.length();i++){
                 int qId = qArray.getJSONObject(i).getInt("id");
@@ -132,7 +124,9 @@ public class QuestionScreen extends AppCompatActivity {
                 qList.add(new Question(qId,title,answer,cList));
             }
 
-            System.out.println(qList.size());
+            currentQuiz = new Quiz(quizObj.getInt("id"),quizObj.getString("name"),quizObj.getInt("pass"),qList,user);
+
+            updateQuestion(0);
 
         }
         catch(IOException e){
@@ -178,12 +172,23 @@ public class QuestionScreen extends AppCompatActivity {
 
         quizPos++;
 
-        user.setqNum(user.getQNum()+1);
-
-        rGroup.clearCheck();
-
         if(quizPos < qList.size()){
+            user.setqNum(user.getQNum()+1);
+            rGroup.clearCheck();
             updateQuestion(quizPos);
+        }
+        else{
+
+            double percentage = ((double)user.getCorrect()/(double)qList.size())*100;
+            Intent finishedScreen = new Intent(this,QuizFinished.class);
+            finishedScreen.putExtra("percent",percentage);
+            if(user.getCorrect() >= currentQuiz.getPassNum()){
+                finishedScreen.putExtra("passed",true);
+            }
+            else{
+                finishedScreen.putExtra("passed",false);
+            }
+            startActivity(finishedScreen);
         }
 
     }

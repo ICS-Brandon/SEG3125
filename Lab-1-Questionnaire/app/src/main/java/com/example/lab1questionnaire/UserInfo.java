@@ -1,17 +1,21 @@
 package com.example.lab1questionnaire;
 
-public class UserScore {
+import java.io.Serializable;
+
+public class UserInfo implements Serializable {
     private int correct, incorrect;
     private String currentQuiz;
     private int qNum;
     private int selection;
+    private int passNum;
 
-    public UserScore(String quiz){
+    public UserInfo(String quiz, int pNum){
         this.correct = 0;
         this.incorrect = 0;
         this.currentQuiz = quiz;
         this.qNum = 0;
         this.selection = 0;
+        this.passNum = pNum;
     }
 
     public void setCorrect(int c){
@@ -53,5 +57,9 @@ public class UserScore {
     public int getSelection(){
         return this.selection;
     }
+
+    public void setPassNum(int p){this.passNum = p;}
+
+    public int getPassNum(){return this.passNum;}
 
 }

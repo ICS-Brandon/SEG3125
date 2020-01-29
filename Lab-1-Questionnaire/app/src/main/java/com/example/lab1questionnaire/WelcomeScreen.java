@@ -123,17 +123,8 @@ public class WelcomeScreen extends AppCompatActivity implements NavigationView.O
 
     public void startQuiz(View view){
         Intent passable = new Intent(this,QuestionScreen.class);
-        String name = getQuizName();
-        int pos = getQuizPos();
-        passable.putExtra("quizName",name);
         passable.putExtra("quizPos",getQuizPos());
         startActivity(passable);
-    }
-
-    public String getQuizName(){
-        int pos = quizSpin.getSelectedItemPosition();
-        String quizName = quizList.get(pos);
-        return quizName;
     }
 
     public int getQuizPos(){

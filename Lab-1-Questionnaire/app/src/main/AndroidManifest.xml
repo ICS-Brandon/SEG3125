@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".QuestionScreen"/>
+        <activity android:name=".QuizFinished"/>
     </application>
 
 </manifest>

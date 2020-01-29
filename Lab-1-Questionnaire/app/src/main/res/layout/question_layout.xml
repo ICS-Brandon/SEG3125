@@ -8,22 +8,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/QViewAnswer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:padding="5dp"
-        android:elevation="20dp"
-        android:background="@drawable/text_box"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/QViewQNum" />
-
-    <TextView
         android:id="@+id/QViewQNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,7 +84,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/SubmitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="81dp"
