@@ -62,4 +62,6 @@ public class UserInfo implements Serializable {
 
     public int getPassNum(){return this.passNum;}
 
+    public void incPassNum(){this.passNum++;}
+
 }

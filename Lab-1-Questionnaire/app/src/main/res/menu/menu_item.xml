@@ -2,13 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navCreateQuiz"
-        android:title="Create a Quiz"
+        android:id="@+id/navHome"
+        android:title="Home"
         />
 
     <item
         android:id="@+id/navSettings"
         android:title="Settings"
+        />
+
+    <item
+        android:id="@+id/navDeleteQuiz"
+        android:title="Delete a Quiz"
         />
 
     <item

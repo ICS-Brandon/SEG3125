@@ -1,22 +1,16 @@
 package com.example.lab1questionnaire;
 
 import android.content.Intent;
-import android.drm.DrmStore;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-
-import java.text.DecimalFormat;
 
 public class QuizFinished extends AppCompatActivity {
 
@@ -60,5 +54,10 @@ public class QuizFinished extends AppCompatActivity {
 
     public String roundTwo(double percentage){
         return String.format("%.2f",percentage);
+    }
+
+    public void backHome(View view){
+        Intent returnIntent = new Intent(this,WelcomeScreen.class);
+        startActivity(returnIntent);
     }
 }

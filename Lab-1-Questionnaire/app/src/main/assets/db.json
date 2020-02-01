@@ -1,9 +1,9 @@
 {
+  "userPass": 0,
   "quizzes" : [
     {
       "id": 1,
       "name":"quiz 1",
-      "pass": 1,
       "questions" : [
           {
             "id": 1,
@@ -51,7 +51,6 @@
     {
       "id": 2,
       "name": "quiz 2",
-      "pass": 1,
       "questions": [
         {
           "id": 1,

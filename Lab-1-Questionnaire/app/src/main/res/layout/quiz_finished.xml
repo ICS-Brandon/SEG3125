@@ -20,7 +20,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@drawable/text_box"
             android:text="" />
 
         <Button
@@ -29,20 +33,10 @@
             android:layout_height="wrap_content"
             android:text="Home"
             android:background="@drawable/lets_go"
-            android:onClick="startQuiz"
+            android:onClick="backHome"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="300dp"
             />
-
-        <Button
-            android:id="@+id/SettingsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="400dp"
-            android:background = "@drawable/lets_go"
-            android:text="Settings" />
-
 
     </RelativeLayout>
 

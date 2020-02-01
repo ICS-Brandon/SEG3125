@@ -15,15 +15,6 @@ android:shape="rectangle">
             </shape>
         </item>
 
-        <item android:bottom="4dp" android:left="4dp">
-            <shape>
-
-                <solid android:color="@color/BlueShadow"/>
-                <corners android:radius="8dp"></corners>
-
-            </shape>
-        </item>
-
     </layer-list>
 
 </item>

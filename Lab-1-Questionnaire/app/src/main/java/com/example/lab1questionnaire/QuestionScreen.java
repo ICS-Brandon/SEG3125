@@ -23,15 +23,15 @@ import java.util.ArrayList;
 public class QuestionScreen extends AppCompatActivity {
 
     private Button submitButton;
-    private int quizPos;
+    private int quizPos,passScore,questionMax;
     private RadioButton opt1,opt2,opt3,opt4,opt5;
     private RadioGroup rGroup;
     private TextView qView,qRight,qWrong,viewQNum;
-    private ArrayList<Question> qList = new ArrayList<>();
+    private ArrayList<Question> questionList = new ArrayList<>();
     private ArrayList<RadioButton> rBList = new ArrayList<>();
     private UserInfo user;
     private Quiz currentQuiz;
-    private static DecimalFormat roundTwo = new DecimalFormat("##.##");
+    private GlobalVars gVars;
 
     @Override
     protected void onCreate(Bundle savedInstance){
@@ -58,9 +58,12 @@ public class QuestionScreen extends AppCompatActivity {
         viewQNum = findViewById(R.id.QViewQNum);
         submitButton = findViewById(R.id.SubmitButton);
 
+        gVars = (GlobalVars) getApplication();
+        passScore = gVars.getPassScore();
+        questionMax = gVars.getQuestionCount();
+
         Intent receive = getIntent();
         quizPos = receive.getIntExtra("quizPos",0);
-
         init_Quiz();
     }
 
@@ -68,7 +71,7 @@ public class QuestionScreen extends AppCompatActivity {
 
         viewQNum.setText("Question #"+String.valueOf(user.getQNum()));
 
-        Question updated = qList.get(qPos);
+        Question updated = questionList.get(qPos);
 
         int choiceCount = updated.cList.size();
 
@@ -93,6 +96,7 @@ public class QuestionScreen extends AppCompatActivity {
     }
 
     public void init_Quiz(){
+
         String json;
         try {
             InputStream is = getAssets().open("db.json");
@@ -107,7 +111,6 @@ public class QuestionScreen extends AppCompatActivity {
             JSONArray jArray = jObj.getJSONArray("quizzes");
             JSONObject quizObj = jArray.getJSONObject(quizPos);
             JSONArray qArray = quizObj.getJSONArray("questions");
-            user = new UserInfo(quizObj.getString("name"),quizObj.getInt("pass"));
 
             for(int i = 0; i< qArray.length();i++){
                 int qId = qArray.getJSONObject(i).getInt("id");
@@ -121,11 +124,57 @@ public class QuestionScreen extends AppCompatActivity {
                     String body = cArray.getJSONObject(j).getString("body");
                     cList.add(new Choice(id,body));
                 }
-                qList.add(new Question(qId,title,answer,cList));
+                questionList.add(new Question(qId,title,answer,cList));
             }
 
-            currentQuiz = new Quiz(quizObj.getInt("id"),quizObj.getString("name"),quizObj.getInt("pass"),qList,user);
 
+            if(questionMax > questionList.size()){
+                questionMax = questionList.size();
+                Toast.makeText(getApplicationContext(),"Specific question count is too big, using all questions",Toast.LENGTH_SHORT).show();
+            }
+            else if(passScore > questionMax){
+                if((questionMax&1)==0){
+                    passScore = questionMax/2;
+                }
+                else{
+                    passScore = questionMax/2 +1;
+                }
+                Toast.makeText(getApplicationContext(),"Specified passing score is too big, using default value of 50%",Toast.LENGTH_SHORT).show();
+            }
+
+            if(questionMax > 0 && questionMax <= questionList.size()){
+                if(passScore > 0 && passScore <= questionMax){
+                    user = new UserInfo(quizObj.getString("name"),passScore);
+                    currentQuiz = new Quiz(quizObj.getInt("id"),quizObj.getString("name"),passScore,questionList,user);
+                }
+                else{
+                    if((questionMax&1)==0){
+                        passScore = questionMax/2;
+                    }
+                    else{
+                        passScore = questionMax/2 +1;
+                    }
+                    user = new UserInfo(quizObj.getString("name"),passScore);
+                    currentQuiz = new Quiz(quizObj.getInt("id"),quizObj.getString("name"),passScore,questionList,user);
+                }
+            }
+            else if(questionMax <= 0 || questionMax > questionList.size()){
+                questionMax = questionList.size();
+                if(passScore > 0 && passScore <= questionMax){
+                    user = new UserInfo(quizObj.getString("name"),passScore);
+                    currentQuiz = new Quiz(quizObj.getInt("id"),quizObj.getString("name"),passScore,questionList,user);
+                }
+                else{
+                    if((questionMax&1)==0){
+                        passScore = questionMax/2;
+                    }
+                    else{
+                        passScore = questionMax/2 +1;
+                    }
+                    user = new UserInfo(quizObj.getString("name"),passScore);
+                    currentQuiz = new Quiz(quizObj.getInt("id"),quizObj.getString("name"),passScore,questionList,user);
+                }
+            }
             updateQuestion(0);
 
         }
@@ -158,7 +207,7 @@ public class QuestionScreen extends AppCompatActivity {
     }
 
     public void submitQuestion(View view){
-        int sol = qList.get(quizPos).getAnswer();
+        int sol = questionList.get(quizPos).getAnswer();
         if(user.getSelection()== sol){
             Toast.makeText(getApplicationContext(),"Correct!",Toast.LENGTH_SHORT).show();
             user.setCorrect(user.getCorrect()+1);
@@ -172,23 +221,25 @@ public class QuestionScreen extends AppCompatActivity {
 
         quizPos++;
 
-        if(quizPos < qList.size()){
+        if(quizPos < questionMax){
             user.setqNum(user.getQNum()+1);
             rGroup.clearCheck();
             updateQuestion(quizPos);
         }
         else{
 
-            double percentage = ((double)user.getCorrect()/(double)qList.size())*100;
+            Toast.makeText(getApplicationContext(),String.valueOf(passScore),Toast.LENGTH_SHORT).show();
+            double percentage = ((double)user.getCorrect()/(double)questionMax)*100;
             Intent finishedScreen = new Intent(this,QuizFinished.class);
             finishedScreen.putExtra("percent",percentage);
-            if(user.getCorrect() >= currentQuiz.getPassNum()){
+            if(user.getCorrect() >= passScore){
                 finishedScreen.putExtra("passed",true);
             }
             else{
                 finishedScreen.putExtra("passed",false);
             }
             startActivity(finishedScreen);
+
         }
 
     }

@@ -1,6 +1,5 @@
 package com.example.lab1questionnaire;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -9,19 +8,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import android.app.Activity;
-import android.util.JsonReader;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,12 +30,14 @@ import org.json.JSONObject;
 
 public class WelcomeScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnItemSelectedListener {
 
-    DrawerLayout drawerLayout;
-    Toolbar toolbar;
-    NavigationView navigationView;
-    ActionBarDrawerToggle toggle;
-    Spinner quizSpin;
-    List<String> quizList = new ArrayList<>();
+    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
+    private NavigationView navigationView;
+    private ActionBarDrawerToggle toggle;
+    private Spinner quizSpin;
+    private List<String> quizList = new ArrayList<>();
+    private TextView quizInfo;
+    private GlobalVars gVars;
 
 
     @Override
@@ -51,6 +49,7 @@ public class WelcomeScreen extends AppCompatActivity implements NavigationView.O
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigationView);
         quizSpin = findViewById(R.id.QHomeSpinner);
+        quizInfo = findViewById(R.id.quizInfo);
 
         toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawerOpen,R.string.drawerClose);
         toggle.syncState();
@@ -66,6 +65,9 @@ public class WelcomeScreen extends AppCompatActivity implements NavigationView.O
 
         quizList.add("Select a quiz");
 
+        gVars = (GlobalVars) getApplication();
+
+        display_Quiz_Info();
         read_quizzes();
 
         ArrayAdapter<String> quizAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,quizList){
@@ -103,8 +105,12 @@ public class WelcomeScreen extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()){
-            case R.id.navCreateQuiz:
-                Toast.makeText(WelcomeScreen.this, "Create a Quiz Selected", Toast.LENGTH_SHORT).show();
+            case R.id.navHome:
+                Toast.makeText(WelcomeScreen.this, "You are already on the homepage", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.navSettings:
+                Intent settings = new Intent(this,Settings.class);
+                startActivity(settings);
                 break;
             case R.id.navContact:
                 Toast.makeText(WelcomeScreen.this, "Contact us Selected", Toast.LENGTH_SHORT).show();
@@ -160,5 +166,26 @@ public class WelcomeScreen extends AppCompatActivity implements NavigationView.O
         catch(JSONException e){
             e.printStackTrace();
         }
+    }
+
+    public void display_Quiz_Info(){
+        String defaultVals = "Current passing score is half of the questions in the quiz";
+        String defaultPass = "Current passing score is: " + gVars.getPassScore() + " questions";
+        String defaultQs = "Current passing score is: " + gVars.getQuestionCount()/2 + " questions";
+        String customVals = "Current passing score is: " + gVars.getPassScore() + " of " + gVars.getQuestionCount() + " questions";
+
+        if(gVars.getPassScore()==0 && gVars.getQuestionCount() ==0){
+            quizInfo.setText(defaultVals + "\n(Change values in settings)");
+        }
+        else if(gVars.getPassScore() != 0 && gVars.getQuestionCount() == 0){
+            quizInfo.setText(defaultPass + "\n(Change values in settings)");
+        }
+        else if(gVars.getPassScore() == 0 && gVars.getQuestionCount() != 0){
+            quizInfo.setText(defaultQs + "\n(Change values in settings)");
+        }
+        else if(gVars.getPassScore()!=0 && gVars.getQuestionCount()!=0){
+            quizInfo.setText(customVals + "\n(Change values in settings");
+        }
+
     }
 }
