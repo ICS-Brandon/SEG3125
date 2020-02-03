@@ -1,154 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    tools:openDrawer="end"
+    android:id="@+id/qViewDrawer"
     android:background="@color/c1"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    tools:context=".WelcomeScreen">
 
-    <TextView
-        android:id="@+id/QViewQNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/top_box"
-        android:padding="5dp"
-        android:text="Question #x"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/QViewQ"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/text_box"
-        android:padding="5dp"
-        android:text="Question Goes in Here"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RadioGroup
-        android:id="@+id/QViewA"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/QViewQ">
-
-        <RadioButton
-            android:id="@+id/Option1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:onClick="op1Select"
-            android:background="@drawable/radiogroup" />
-
-        <RadioButton
-            android:id="@+id/Option2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="op2Select"
-            android:background="@drawable/radiogroup"
-            android:layout_margin="10dp" />
-
-        <RadioButton
-            android:id="@+id/Option3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="op3Select"
-            android:background="@drawable/radiogroup"
-            android:layout_margin="10dp" />
-
-        <RadioButton
-            android:id="@+id/Option4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="op4Select"
-            android:background="@drawable/radiogroup"
-            android:layout_margin="10dp" />
-
-        <RadioButton
-            android:id="@+id/Option5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="op5Select"
-            android:background="@drawable/radiogroup"
-            android:layout_margin="10dp" />
-
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/SubmitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="81dp"
-        android:background="@drawable/lets_go"
-        android:text="Submit Answer"
-        android:padding="5dp"
-        android:onClick="submitQuestion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/QViewA" />
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="78dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
-        android:background="@drawable/side_box"
-        android:orientation="vertical"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/QViewA">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/QViewRTitle"
+            android:id="@+id/QViewQNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Correct"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="443dp" />
+            android:background="@drawable/top_box"
+            android:padding="5dp"
+            android:text="Question #x" />
 
         <TextView
-            android:id="@+id/QViewRight"
+            android:id="@+id/QViewQ"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="443dp" />
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/text_box"
+            android:padding="5dp"
+            android:text="Question Goes in Here"
+            android:gravity="center_horizontal" />
+
+        <RadioGroup
+            android:id="@+id/QViewA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:layout_gravity="center">
+
+            <RadioButton
+                android:id="@+id/Option1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="op1Select"
+                android:background="@drawable/radiogroup" />
+
+            <RadioButton
+                android:id="@+id/Option2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="op2Select"
+                android:background="@drawable/radiogroup"
+                android:layout_margin="10dp" />
+
+            <RadioButton
+                android:id="@+id/Option3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="op3Select"
+                android:background="@drawable/radiogroup"
+                android:layout_margin="10dp" />
+
+            <RadioButton
+                android:id="@+id/Option4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="op4Select"
+                android:background="@drawable/radiogroup"
+                android:layout_margin="10dp" />
+
+            <RadioButton
+                android:id="@+id/Option5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="op5Select"
+                android:background="@drawable/radiogroup"
+                android:layout_margin="10dp" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="78dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:background="@drawable/side_box"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/QViewA">
+
+            <TextView
+                android:id="@+id/QViewRTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correct"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="443dp" />
+
+            <TextView
+                android:id="@+id/QViewRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="443dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="78dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/side_box"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/QViewWTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Incorrect" />
+
+            <TextView
+                android:id="@+id/QViewWrong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/SubmitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/lets_go"
+            android:text="Submit Answer"
+            android:padding="5dp"
+            android:onClick="submitQuestion"
+            android:layout_gravity="center"/>
 
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="78dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/side_box"
-        android:orientation="vertical"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-        <TextView
-            android:id="@+id/QViewWTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Incorrect" />
-
-        <TextView
-            android:id="@+id/QViewWrong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0" />
-    </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:id="@+id/qNavView"
+        app:menu="@menu/menu_item"
+        app:headerLayout="@layout/nav_header"
+        android:background="@color/c3"
+        android:layout_gravity="start"
+        app:itemTextColor="#fff">
+    </com.google.android.material.navigation.NavigationView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

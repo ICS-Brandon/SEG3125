@@ -31,9 +31,7 @@ import org.json.JSONObject;
 public class WelcomeScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, OnItemSelectedListener {
 
     private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
     private NavigationView navigationView;
-    private ActionBarDrawerToggle toggle;
     private Spinner quizSpin;
     private List<String> quizList = new ArrayList<>();
     private TextView quizInfo;
@@ -46,19 +44,10 @@ public class WelcomeScreen extends AppCompatActivity implements NavigationView.O
         setContentView(R.layout.welcome_screen);
 
         drawerLayout = findViewById(R.id.drawer);
-        toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigationView);
         quizSpin = findViewById(R.id.QHomeSpinner);
         quizInfo = findViewById(R.id.quizInfo);
 
-        toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawerOpen,R.string.drawerClose);
-        toggle.syncState();
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        drawerLayout.addDrawerListener(toggle);
         navigationView.setNavigationItemSelectedListener(this);
 
         quizSpin.setOnItemSelectedListener(this);
@@ -128,9 +117,17 @@ public class WelcomeScreen extends AppCompatActivity implements NavigationView.O
     }
 
     public void startQuiz(View view){
-        Intent passable = new Intent(this,QuestionScreen.class);
-        passable.putExtra("quizPos",getQuizPos());
-        startActivity(passable);
+
+        if(getQuizPos() < 0){
+            Toast.makeText(getApplicationContext(),"Error: Please select a valid quiz",Toast.LENGTH_SHORT).show();
+            quizSpin.requestFocus();
+        }
+        else{
+            Intent passable = new Intent(this,QuestionScreen.class);
+            passable.putExtra("quizPos",getQuizPos());
+            startActivity(passable);
+        }
+
     }
 
     public int getQuizPos(){

@@ -21,7 +21,6 @@
         </activity>
         <activity android:name=".QuestionScreen"/>
         <activity android:name=".QuizFinished"/>
-        <activity android:name=".CreateQuiz"/>
         <activity android:name=".Settings"/>
     </application>
 

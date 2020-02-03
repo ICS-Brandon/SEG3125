@@ -2,6 +2,7 @@ package com.example.lab1questionnaire;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -9,15 +10,15 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class QuestionScreen extends AppCompatActivity {
@@ -25,6 +26,8 @@ public class QuestionScreen extends AppCompatActivity {
     private Button submitButton;
     private int quizPos,passScore,questionMax;
     private RadioButton opt1,opt2,opt3,opt4,opt5;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
     private RadioGroup rGroup;
     private TextView qView,qRight,qWrong,viewQNum;
     private ArrayList<Question> questionList = new ArrayList<>();
@@ -62,6 +65,37 @@ public class QuestionScreen extends AppCompatActivity {
         passScore = gVars.getPassScore();
         questionMax = gVars.getQuestionCount();
 
+        drawerLayout = findViewById(R.id.qViewDrawer);
+        navigationView = findViewById(R.id.qNavView);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.navHome:
+                        Intent home = new Intent(getApplicationContext(),WelcomeScreen.class);
+                        startActivity(home);
+                        break;
+                    case R.id.navSettings:
+                        Intent settings = new Intent(getApplicationContext(),Settings.class);
+                        startActivity(settings);
+                        break;
+                    case R.id.navContact:
+                        Toast.makeText(getApplicationContext(), "Contact us Selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navAbout:
+                        Toast.makeText(getApplicationContext(), "About us Selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navHelp:
+                        Toast.makeText(getApplicationContext(), "Help Selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
+
         Intent receive = getIntent();
         quizPos = receive.getIntExtra("quizPos",0);
         init_Quiz();
@@ -69,7 +103,7 @@ public class QuestionScreen extends AppCompatActivity {
 
     public void updateQuestion(int qPos){
 
-        viewQNum.setText("Question #"+String.valueOf(user.getQNum()));
+        viewQNum.setText("Question #"+String.valueOf(user.getQNum()+1));
 
         Question updated = questionList.get(qPos);
 
@@ -82,8 +116,6 @@ public class QuestionScreen extends AppCompatActivity {
         for(int i = 0; i < choiceCount; i++){
             rBList.get(i).setText(updated.cList.get(i).body);
         }
-
-
     }
 
 
@@ -128,6 +160,7 @@ public class QuestionScreen extends AppCompatActivity {
             }
 
 
+            System.out.println("\n\n\n"+questionList.get(1).getTitle());
             if(questionMax > questionList.size()){
                 questionMax = questionList.size();
                 Toast.makeText(getApplicationContext(),"Specific question count is too big, using all questions",Toast.LENGTH_SHORT).show();
@@ -227,10 +260,10 @@ public class QuestionScreen extends AppCompatActivity {
             updateQuestion(quizPos);
         }
         else{
-
-            Toast.makeText(getApplicationContext(),String.valueOf(passScore),Toast.LENGTH_SHORT).show();
             double percentage = ((double)user.getCorrect()/(double)questionMax)*100;
             Intent finishedScreen = new Intent(this,QuizFinished.class);
+            finishedScreen.putExtra("right",user.getCorrect());
+            finishedScreen.putExtra("wrong",user.getIncorrect());
             finishedScreen.putExtra("percent",percentage);
             if(user.getCorrect() >= passScore){
                 finishedScreen.putExtra("passed",true);

@@ -5,24 +5,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.io.InputStream;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
 
 public class Settings extends AppCompatActivity {
 
     private GlobalVars gVars;
     private EditText passInput,qInput;
     private int pass, qNumber;
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstance){
@@ -34,6 +32,36 @@ public class Settings extends AppCompatActivity {
 
         passInput.addTextChangedListener(pWatcher);
         qInput.addTextChangedListener(qWatcher);
+
+        drawerLayout = findViewById(R.id.SettingsDrawer);
+        navigationView =findViewById(R.id.settingsNav);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.navHome:
+                        Intent home = new Intent(getApplicationContext(),WelcomeScreen.class);
+                        startActivity(home);
+                        break;
+                    case R.id.navSettings:
+                        Toast.makeText(getApplicationContext(), "You are currently in settings", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navContact:
+                        Toast.makeText(getApplicationContext(), "Contact us Selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navAbout:
+                        Toast.makeText(getApplicationContext(), "About us Selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navHelp:
+                        Toast.makeText(getApplicationContext(), "Help Selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
 
         gVars = (GlobalVars) getApplication();
 

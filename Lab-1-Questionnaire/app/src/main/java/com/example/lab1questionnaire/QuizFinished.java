@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +13,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Set;
+
 public class QuizFinished extends AppCompatActivity {
 
     private double percentage;
+    private int right, wrong;
     private boolean passed;
     private TextView grade;
     private NavigationView navigationView;
@@ -27,6 +31,8 @@ public class QuizFinished extends AppCompatActivity {
         Intent receive = getIntent();
         percentage = receive.getDoubleExtra("percent",0);
         passed = receive.getBooleanExtra("passed",false);
+        right = receive.getIntExtra("right",0);
+        wrong = receive.getIntExtra("wrong",0);
 
         drawerLayout = findViewById(R.id.FinishDrawer);
         grade = findViewById(R.id.GradeView);
@@ -34,14 +40,35 @@ public class QuizFinished extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.navHome:
+                        Intent home = new Intent(getApplicationContext(),WelcomeScreen.class);
+                        startActivity(home);
+                        break;
+                    case R.id.navSettings:
+                        Intent settings = new Intent(getApplicationContext(),Settings.class);
+                        startActivity(settings);
+                        break;
+                    case R.id.navContact:
+                        Toast.makeText(getApplicationContext(), "Contact us Selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navAbout:
+                        Toast.makeText(getApplicationContext(), "About us Selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navHelp:
+                        Toast.makeText(getApplicationContext(), "Help Selected", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
                 return false;
             }
         });
 
         String percent = roundTwo(percentage);
 
-        String fail = "Sorry, but you failed the test. You got " + percent + "% which doesn't make the cut, better luck next time";
-        String pass = "Congratulations you passed the test! You got " + percent + "%! Good job.";
+        String fail = "Sorry, but you failed the test. You got " + right + " questions right and " + wrong + " questions wrong, which is " + percent + "% which doesn't make the cut, better luck next time";
+        String pass = "Congratulations you passed the test! You got " + right + " questions right and " + wrong + " questions wrong, which is " + percent + "%! Good job.";
 
         if(passed){
             grade.setText(pass);
