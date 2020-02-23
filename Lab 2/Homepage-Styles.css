@@ -1,0 +1,154 @@
+
+
+.Banner{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #374151;
+  width: 100%!important;
+}
+
+.sideScroll{
+  position: fixed;
+  right: 0;
+  top:60px;
+  background-color: #374151;
+  height: 100%;
+  width: 0px;
+  z-index: -1;
+  overflow-x: hidden;
+  display: block;
+  margin: auto;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  overflow-x:hidden;
+}
+
+#sideScroll{
+  transition: all 0.3s linear;
+}
+
+.scrollText{
+  margin: auto;
+  font-family: font-family: 'Source Code Pro', monospace;
+  font-size: 20px;
+  width: 150px;
+  overflow:hidden;
+  float:left;
+}
+
+#bannerText{
+  display: inline-block;
+  padding: 5px;
+  margin: auto;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 30px;
+  color: #FF715B;
+}
+
+#options{
+  display:inline-block;
+  float:right;
+  padding-right:5px;
+  padding-top:15px;
+  align-content:flex-end;
+  margin: auto;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  color: #FF715B;
+}
+
+#options:hover{
+  text-decoration: underline #FF715B;
+  cursor:pointer;
+}
+
+#options:onclick{openNav()}
+
+#icon{
+  display: block;
+  text-decoration:none;
+  padding-left:10px;
+  padding-right:20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  overflow-x:hidden;
+}
+
+#icon:hover{
+  background-color: #2E3744;
+  cursor:pointer;
+}
+
+a#icon{
+  text-decoration: none;
+  color: #FF715B;
+  overflow: hidden;
+}
+
+#mainContent{
+  transition: margin-right 0.5s;
+}
+
+#xImage{
+  background: url("CloseArrow.png");
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-position:center;
+  height: 25px;
+  width: 25px;
+  padding-top: 15px;
+  padding-left:15px;
+}
+
+#xImage:hover{
+  background: url("CloseArrowHover.png");
+  cursor:pointer;
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-position:center;
+  padding-top: 15px;
+  padding-left:15px;
+}
+
+ul{
+  list-style-type:none;
+  float:left;
+  margin:0px;
+  padding:0px;
+}
+
+#help{
+  background: url("HelpIcon.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 30px;
+  width: 30px;
+  padding-top: 15px;
+  padding-right: 5px;
+  padding-left: 5px;
+  float:right;
+}
+
+#help:hover{
+  background:url("HelpIconHover.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 30px;
+  width: 30px;
+  padding-top: 15px;
+  padding-right: 5px;
+  padding-left: 5px;
+  float:right;
+  cursor: pointer;
+}
+
+#mainTable{
+  width: auto;
+  height:auto;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:50px;
+}
