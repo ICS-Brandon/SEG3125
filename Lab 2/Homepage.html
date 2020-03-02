@@ -21,52 +21,53 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </head>
-<body onload="onLoad()">
+<body onload = "onLoad()">
   <!-- Div to encapsulate all content !-->
   <div class="mainContent" id="mainContent">
-
-  <div id="tableDiv">
-    <table id="mainTable">
-        <tr>
-          <th>Firstname</th>
-          <th>Lastname</th>
-          <th>Age</th>
-        </tr>
-        <tr>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>50</td>
-        </tr>
-        <tr>
-          <td>Eve</td>
-          <td>Jackson</td>
-          <td>94</td>
-        </tr>
-        <tr>
-          <td>John</td>
-          <td>Doe</td>
-          <td>80</td>
-        </tr>
-      </table>
-    </div>
 
     <!-- Div containing content used in top banner of Homepage !-->
     <div class="Banner">
 
       <!-- Adding buttons and message to banner !-->
       <p id="bannerText">This is some test text</p>
-      <a href = "AddAttack.html"><div id="help"></div></a>
+      <input id = "searchBar" type="text" placeholder="Search...">
+      <a href = "Homepage.html"><div id="help"></div></a>
       <span id="options" onclick="openNav()">Options</span>
 
     </div>
+    <div class ="flexarea">
 
+    <div id="tableDiv">
+      <table id="mainTable">
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Age</th>
+          </tr>
+          <tr>
+            <td>Jill</td>
+            <td>Smith</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>Eve</td>
+            <td>Jackson</td>
+            <td>94</td>
+          </tr>
+          <tr>
+            <td>John</td>
+            <td>Doe</td>
+            <td>80</td>
+          </tr>
+        </table>
+      </div>
     <!-- Div for the Nav Bar !-->
     <div class="sideScroll" id="sideScroll">
 
       <!--  Unordered list containing all options for the user !-->
       <ul class = "scrollText">
-        <li><div onclick="closeNav()" id = "xImage"></div>
-        <li><a href="AddAttack.html" id = "icon">Add An Attack</a></li>
+        <li><div id = "xImage" onclick="closeNav()"></div></li>
+        <li><a href="AddAttack.html" id = "icon">Add An APT</a></li>
         <li><a href="google.ca" id = "icon">Visualization</a></li>
         <li><a href="www.google.ca" id = "icon">Contact Us</a></li>
         <li><a href="www.google.ca" id = "icon">Help</a></li>
@@ -76,6 +77,8 @@
     </div>
 
     </div>
+
+  </div>
 
   </div>
 </body>

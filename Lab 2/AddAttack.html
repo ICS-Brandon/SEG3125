@@ -4,20 +4,95 @@
 
 <head>
 
-    <!-- Titling webiste and linking stlye sheet !-->
-
-    <title>Add an Attack</title>
+    <!-- Titling webiste !-->
+    <title>Add An APT</title>
 
     <link href="Attack-Page-Styles.css" rel = "stylesheet">
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:800&display=swap" rel="stylesheet">
+    <!-- Adding link to fonts used and setting character type !-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:800|Source+Code+Pro:600&display=swap" rel="stylesheet">
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <!-- Adding link to Javascript file !-->
-
-    <script href="backend.js"></script>
+    <script src="backend.js"></script>
+    <script type="text/javascript" src="data.json"></script>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </head>
+<body id="mainBody">
+  <!-- Div to encapsulate all content !-->
+  <div class="mainContent" id="mainContent">
 
+    <!-- Div containing content used in top banner of Homepage !-->
+    <div class="Banner">
+
+      <!-- Adding buttons and message to banner !-->
+      <p id="bannerText">This is some test text</p>
+      <a href = "#"><div id="help"></div></a>
+      <span id="options" onclick="openNav()">Options</span>
+      <span id="options" onclick="returnHome()">Home</span>
+
+    </div>
+
+    <div class = "flexContainer">
+
+    <!-- Div for the Nav Bar !-->
+    <div class="sideScroll" id="sideScroll">
+
+      <!--  Unordered list containing all options for the user !-->
+      <ul class = "scrollText">
+        <li><div id = "xImage" onclick="closeNav()"></div></li>
+        <li><a href="#" id="icon" style ="cursor:context-menu; color:#FF9F91;">Add An APT</a></li>
+        <li><a href="google.ca" id = "icon">Visualization</a></li>
+        <li><a href="www.google.ca" id = "icon">Contact Us</a></li>
+        <li><a href="www.google.ca" id = "icon">Help</a></li>
+      </ul>
+
+    </div>
+
+    </div>
+
+    </div>
+
+  </div>
+
+  <div class ="fieldSet">
+      <h2 class="fs-title">Add An APT</h2>
+      <form name="aptForm">
+      <div class = "blockDisplay">
+      <input onkeydown="submitFormEnter(event)" id="cName" type="text" name="Common Names" placeholder="Common Names" />
+      <input onkeydown="submitFormEnter(event)" id="aName" type="text" name="Alternate Names" placeholder="Alternate Names" />
+      </div>
+      <div class = "blockDisplay">
+      <input onkeydown="submitFormEnter(event)" id="tSect" type="text" name="Target Sector" placeholder="Target Sector" />
+      <input onkeydown="submitFormEnter(event)" id="aVect" type="text" name="Attack Vector" placeholder="Attack Vector" />
+      </div>
+      <div class = "blockDisplay">
+      <input onkeydown="submitFormEnter(event)" id="aMal" type="text" name="Associated Malware" placeholder="Associated Malware"/>
+      <input onkeydown="submitFormEnter(event)" id="TTPs" type="text" name="TTPs" placeholder="TTPs"/>
+      </div>
+      <div class = "blockDisplay">
+      <input onkeydown="submitFormEnter(event)" class ="lastRow" id="modO" type = "text" name="Modus Operandi" placeholder="Modus Operandi">
+      <input onkeydown="submitFormEnter(event)" class ="lastRow" id="ref" type = "text" name="References" placeholder="References"/>
+      <input onkeydown="submitFormEnter(event)" class ="lastRow" id="tools" type = "text" name="Toolsets" placeholder="Toolsets"/>
+      </div>
+      <div class = "blockDisplay">
+      <button type="button" onclick="submitForm()">Submit</button>
+      </div>
+      <div id="descriptP">
+        <span> Please fill out all possible fields, click submit when you are satisfied with the information you have given</span>
+      </div>
+      </form>
+      <div class = "popup" id ="popupDiv">
+        <span id="popupText">APT Submitted</span>
+      </div>
+  </div>
+  <span style ="display:flex; justify-content:center; margin-top: 20px;">
+    This area would be used for disclaimers and things such as detailed descriptions about each field, that would be natural to a website like this one
+  </span>
+</body>
 </html>
+
+<!-- highlighted color is FF4B3C !-->

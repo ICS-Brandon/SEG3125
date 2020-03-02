@@ -1,21 +1,49 @@
+body{
+  background-color: #47587F;
+}
 
+table{
+  background-color: #2E3744;
+  padding: 5px;
+  border-radius: 5px;
+  text-decoration-color: white;
+}
+
+tr,th,td{
+  color: #FF715B;
+  padding: 5px;
+}
+
+#tableDiv{
+  margin-top: 100px;
+  margin-left:auto;
+  margin-right:auto;
+  width:auto;
+  height:auto;
+  display: inline-block;
+
+}
 
 .Banner{
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #374151;
+  background-color: #2E3744;
   width: 100%!important;
+}
+
+.flexarea{
+  display:flex;
 }
 
 .sideScroll{
   position: fixed;
+  height:auto;
   right: 0;
   top:60px;
   background-color: #374151;
   height: 100%;
   width: 0px;
-  z-index: -1;
   overflow-x: hidden;
   display: block;
   margin: auto;
@@ -28,11 +56,30 @@
   transition: all 0.3s linear;
 }
 
+#searchBar{
+  position: absolute;
+  padding-left: 5px;
+  padding-top: 2px;
+  font-size: 20px;
+  background:none;
+  border:none;
+  top:16px;
+  color: #FF715B;
+}
+
+#searchBar::placeholder{
+  color: #47587F;
+}
+
+#searchBar:focus{
+  outline-color: #FF715B;
+}
+
 .scrollText{
   margin: auto;
-  font-family: font-family: 'Source Code Pro', monospace;
+  font-family: 'Source Code Pro', monospace;
   font-size: 20px;
-  width: 150px;
+  width: 180px;
   overflow:hidden;
   float:left;
 }
@@ -103,7 +150,7 @@ a#icon{
 
 #xImage:hover{
   background: url("CloseArrowHover.png");
-  cursor:pointer;
+  cursor: pointer;
   background-size: 25px 25px;
   background-repeat: no-repeat;
   background-position:center;
@@ -114,8 +161,7 @@ a#icon{
 ul{
   list-style-type:none;
   float:left;
-  margin:0px;
-  padding:0px;
+  padding-left: 0px;
 }
 
 #help{
@@ -150,5 +196,6 @@ ul{
   height:auto;
   margin-left:auto;
   margin-right:auto;
-  margin-top:50px;
+  padding: 5px;
+  border-collapse: collapse;
 }

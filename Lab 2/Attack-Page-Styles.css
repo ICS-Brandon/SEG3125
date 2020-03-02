@@ -1,0 +1,260 @@
+body{
+  background-color: #47587F;
+}
+
+input{
+  border:none;
+  width: 300px;
+  height: 30px;
+  margin: 20px;
+  font-size: 18px;
+  font-family:'Source Code Pro', monospace;
+  overflow: scroll;
+  border-radius: 5px;
+  background-color: #21333D;
+  color: #FF715B;
+  padding:5px;
+}
+
+#descriptP{
+  display: flex;
+  justify-content: center;
+  color: #21333D;
+  padding:10px;
+}
+
+input:focus{
+  outline-color: #1EA896;
+}
+
+button{
+  border:none;
+  border-radius: 5px;
+  width: 150px;
+  margin: 10px;
+  height: 40px;
+  font-size: 20px;
+  color: #FF715B;
+  font-family:'Source Code Pro', monospace;
+  vertical-align: middle;
+  background: #21333D;
+}
+
+button:focus{
+  outline-color: #1EA896;
+}
+
+::placeholder{
+  color:#FF715B;
+  text-align: center;
+}
+
+.blockDisplay{
+  display: flex;
+  justify-content: center;
+}
+
+.flexContainer{
+  display:flex;
+}
+
+.bannerContainer{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Banner{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #374151;
+  width: 100%!important;
+}
+
+.fieldSet{
+  margin-top: 100px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #2E3744;
+  border-width: 5px;
+}
+
+.sideScroll{
+  position: fixed;
+  height:auto;
+  right: 0;
+  top:60px;
+  background-color: #374151;
+  height: 100%;
+  width: 0px;
+  overflow-x: hidden;
+  display: block;
+  margin: auto;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  overflow-x:hidden;
+}
+#sideScroll{
+  transition: all 0.3s linear;
+}
+
+.scrollText{
+  margin: auto;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 20px;
+  width: 180px;
+  overflow:hidden;
+  float:left;
+}
+
+#bannerText{
+  display: inline-block;
+  padding: 5px;
+  margin: auto;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 30px;
+  color: #FF715B;
+}
+
+#options{
+  display:inline-block;
+  float:right;
+  padding-right:5px;
+  padding-top:15px;
+  align-content:flex-end;
+  margin: auto;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  color: #FF715B;
+}
+
+#options:hover{
+  text-decoration: underline #FF715B;
+  cursor:pointer;
+}
+
+#options:onclick{openNav()}
+
+#icon{
+  display: block;
+  text-decoration:none;
+  padding-left:10px;
+  padding-right:20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  overflow-x:hidden;
+}
+
+#icon:hover{
+  background-color: #2E3744;
+  cursor:pointer;
+}
+
+a#icon{
+  text-decoration: none;
+  color: #FF715B;
+  overflow: hidden;
+}
+
+#mainContent{
+  transition: margin-right 0.5s;
+}
+
+#xImage{
+  background: url("CloseArrow.png");
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-position:center;
+  height: 25px;
+  width: 25px;
+  padding-top: 15px;
+  padding-left:15px;
+}
+
+#xImage:hover{
+  background: url("CloseArrowHover.png");
+  cursor: pointer;
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-position:center;
+  padding-top: 15px;
+  padding-left:15px;
+
+}
+
+ul{
+  list-style-type:none;
+  float:left;
+  padding-left: 0px;
+}
+
+#help{
+  display:inline-block;
+  float:right;
+  background: url("HelpIcon.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 30px;
+  width: 30px;
+  padding-top: 15px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+#help:hover{
+  background:url("HelpIconHover.png");
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 30px;
+  width: 30px;
+  padding-top: 15px;
+  padding-right: 5px;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.fs-title {
+  display:flex;
+  justify-content: center;
+	font-size: 30px;
+  text-decoration: underline;
+	text-transform: uppercase;
+	color: #FF715B;
+	margin-bottom: 10px;
+}
+
+.lastRow{
+  width: 200px;
+  margin-left: 7px;
+  margin-right: 7px;
+}
+
+.popup{
+  opacity: 0;
+  display:flex;
+  justify-content: center;
+  width:auto;
+  height:auto;
+  padding:15px;
+  transition: opacity 0.3s ease;
+}
+
+.newPopup{
+  visibility: visible;
+  opacity: 0.7;
+  display:flex;
+  justify-content: center;
+  width:auto;
+  height:auto;
+  padding:15px;
+}
+
+#popupText{
+  border: 1px solid #1EA896;
+  background-color: #374151;
+  border-radius: 3px;
+  padding: 5px;
+  color: #FFA293;
+}
