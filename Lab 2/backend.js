@@ -26,7 +26,23 @@ function onLoad(){
   Need to read JSON File
   Extract Names and display
   */
-  $.getJSON('attack_matrix.json', function(data){
+  $.getJSON('https://raw.githubusercontent.com/ICS-Brandon/SEG3125/master/Lab%202/attack_matrix.json', function(data){
+
+    var array = data.objects;
+    var cleanArray = array.filter(function() {return true;});
+    var table = document.getElementById('mainTable');
+    var j = 0;
+
+    $.each(cleanArray, function(i,cleanArray){
+      if(cleanArray.name != null){
+        var tr = table.insertRow(-1);
+        var cell = tr.insertCell(0);
+        //var anchor = document.createElement("A");
+        //anchor.text = cleanArray.name;
+        //anchor.href = cleanArray.external_references[0].url;
+        cell.innerHTML = cleanArray.name;
+      }
+    });
     console.log('it worked');
   });
 }
