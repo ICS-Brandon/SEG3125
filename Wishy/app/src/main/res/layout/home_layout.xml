@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/backgroundImageHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/BackgroundImage" />
+
+    <ImageView
+        android:id="@+id/iconBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/Icon_Background" />
+
+    <Button
+        android:id="@+id/homeIcon"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="115px"
+        android:layout_height="115px"
+        android:layout_marginLeft="100dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/Home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/helpIcon"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="115px"
+        android:layout_height="115px"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/Help"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/addIcon"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="115px"
+        android:layout_height="115px"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/homeIcon" />
+
+    <Button
+        android:id="@+id/settingsIcon"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="115px"
+        android:layout_height="115px"
+        android:layout_marginLeft="55dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/Settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/addIcon" />
+
+    <EditText
+        android:id="@+id/searchBar"
+        android:layout_width="700px"
+        android:layout_height="100px"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/Search_Bar"
+        android:paddingLeft="15dp"
+        android:paddingRight="5dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/searchIcon"
+        android:layout_width="80px"
+        android:layout_height="80px"
+        android:layout_marginStart="145dp"
+        android:layout_marginLeft="145dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/Search_Glass" />
+
+    <Spinner
+        android:id="@+id/sortSpinner"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

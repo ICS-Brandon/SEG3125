@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/backgroundImageSettings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/BackgroundImage" />
+
+    <ImageView
+        android:id="@+id/verticalSeparator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/VertSeparator" />
+
+    <ImageView
+        android:id="@+id/iconBackgroundSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/Icon_Background" />
+
+    <Button
+        android:id="@+id/settingsIconSettings"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="115px"
+        android:layout_height="115px"
+        android:layout_marginRight="55dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/Settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/helpIconSettings" />
+
+    <Button
+        android:id="@+id/helpIconSettings"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="115px"
+        android:layout_height="115px"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/Help"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/homeIconSettings"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="115px"
+        android:layout_height="115px"
+        android:layout_marginLeft="100dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/Home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/addIconSettings"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="115px"
+        android:layout_height="115px"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/homeIconSettings" />
+
+    <ImageView
+        android:id="@+id/wishyTitleCard"
+        android:layout_width="250px"
+        android:layout_height="250px"
+        android:layout_marginBottom="600dp"
+        app:layout_constraintBottom_toTopOf="@+id/homeIconSettings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/Wishy_Title" />
+
+    <ImageView
+        android:id="@+id/sideSeparator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:layout_marginRight="3dp"
+        app:layout_constraintRight_toRightOf="@+id/verticalSeparator"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/SideSeparator" />
+
+    <ImageView
+        android:id="@+id/sideSeparator2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="62dp"
+        android:layout_marginRight="3dp"
+        app:layout_constraintRight_toRightOf="@+id/verticalSeparator"
+        app:layout_constraintTop_toTopOf="@+id/sideSeparator"
+        app:srcCompat="@drawable/SideSeparator" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="15dp"
+        android:text="BrandonW159"
+        android:textColor="#FFFFFF"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sideSeparator" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="20dp"
+        android:text="Brandon W."
+        android:textColor="#FFFFFF"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/username" />
+
+    <Button
+        android:id="@+id/accountInfo"
+        style="?android:attr/borderlessButtonStyle"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="5dp"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:background="#00FFFFFF"
+        android:text="Account Info."
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sideSeparator2" />
+
+    <Button
+        android:id="@+id/options"
+        style="?android:attr/borderlessButtonStyle"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="5dp"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:background="#00FFFFFF"
+        android:text="Options"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accountInfo" />
+
+    <Button
+        android:id="@+id/contactUs"
+        style="?android:attr/borderlessButtonStyle"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="5dp"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:background="#00FFFFFF"
+        android:text="Contact Us"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/options" />
+
+    <Button
+        android:id="@+id/Help"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:background="#00FFFFFF"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="5dp"
+        android:text="Help"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contactUs" />
+
+    <Button
+        android:id="@+id/logout"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:background="#00FFFFFF"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="5dp"
+        android:text="Logout"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Help" />
+</androidx.constraintlayout.widget.ConstraintLayout>
