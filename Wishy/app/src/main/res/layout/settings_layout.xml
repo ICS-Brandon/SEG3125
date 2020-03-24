@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/BackgroundImage" />
+        app:srcCompat="@drawable/background_image" />
 
     <ImageView
         android:id="@+id/verticalSeparator"
@@ -24,7 +24,7 @@
         android:layout_marginLeft="100dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/VertSeparator" />
+        app:srcCompat="@drawable/vertseparator" />
 
     <ImageView
         android:id="@+id/iconBackgroundSettings"
@@ -35,7 +35,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/Icon_Background" />
+        app:srcCompat="@drawable/icon_background" />
 
     <Button
         android:id="@+id/settingsIconSettings"
@@ -44,7 +44,7 @@
         android:layout_height="115px"
         android:layout_marginRight="55dp"
         android:layout_marginBottom="7dp"
-        android:background="@drawable/Settings"
+        android:background="@drawable/settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="@+id/helpIconSettings" />
 
@@ -55,7 +55,7 @@
         android:layout_height="115px"
         android:layout_marginRight="100dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/Help"
+        android:background="@drawable/help"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -66,7 +66,7 @@
         android:layout_height="115px"
         android:layout_marginLeft="100dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/Home"
+        android:background="@drawable/home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -77,7 +77,7 @@
         android:layout_height="115px"
         android:layout_marginLeft="15dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/Add"
+        android:background="@drawable/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/homeIconSettings" />
 
@@ -88,7 +88,7 @@
         android:layout_marginBottom="600dp"
         app:layout_constraintBottom_toTopOf="@+id/homeIconSettings"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/Wishy_Title" />
+        app:srcCompat="@drawable/wishy_title" />
 
     <ImageView
         android:id="@+id/sideSeparator"
@@ -98,7 +98,7 @@
         android:layout_marginRight="3dp"
         app:layout_constraintRight_toRightOf="@+id/verticalSeparator"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/SideSeparator" />
+        app:srcCompat="@drawable/sideseparator" />
 
     <ImageView
         android:id="@+id/sideSeparator2"
@@ -108,7 +108,7 @@
         android:layout_marginRight="3dp"
         app:layout_constraintRight_toRightOf="@+id/verticalSeparator"
         app:layout_constraintTop_toTopOf="@+id/sideSeparator"
-        app:srcCompat="@drawable/SideSeparator" />
+        app:srcCompat="@drawable/sideseparator" />
 
     <TextView
         android:id="@+id/username"

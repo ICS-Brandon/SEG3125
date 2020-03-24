@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/BackgroundImage" />
+        app:srcCompat="@drawable/background_image" />
 
     <ImageView
         android:id="@+id/iconBackground"
@@ -26,7 +26,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/Icon_Background" />
+        app:srcCompat="@drawable/icon_background" />
 
     <Button
         android:id="@+id/homeIcon"
@@ -35,7 +35,7 @@
         android:layout_height="115px"
         android:layout_marginLeft="100dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/Home"
+        android:background="@drawable/home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -46,7 +46,7 @@
         android:layout_height="115px"
         android:layout_marginRight="100dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/Help"
+        android:background="@drawable/help"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -57,7 +57,7 @@
         android:layout_height="115px"
         android:layout_marginLeft="15dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/Add"
+        android:background="@drawable/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/homeIcon" />
 
@@ -68,7 +68,7 @@
         android:layout_height="115px"
         android:layout_marginLeft="55dp"
         android:layout_marginBottom="7dp"
-        android:background="@drawable/Settings"
+        android:background="@drawable/settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/addIcon" />
 
@@ -77,7 +77,7 @@
         android:layout_width="700px"
         android:layout_height="100px"
         android:layout_marginRight="5dp"
-        android:background="@drawable/Search_Bar"
+        android:background="@drawable/search_bar"
         android:paddingLeft="15dp"
         android:paddingRight="5dp"
         app:layout_constraintRight_toRightOf="parent"
@@ -92,7 +92,7 @@
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/Search_Glass" />
+        app:srcCompat="@drawable/search_glass" />
 
     <Spinner
         android:id="@+id/sortSpinner"

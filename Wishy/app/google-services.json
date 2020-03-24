@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "478491034382",
+    "firebase_url": "https://wishy-fff38.firebaseio.com",
+    "project_id": "wishy-fff38",
+    "storage_bucket": "wishy-fff38.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478491034382:android:a4ec79c9d60d1b0bb10d5f",
+        "android_client_info": {
+          "package_name": "com.example.wishy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478491034382-2pvvsa606hk1ld24t9jq5gieksv9b7rv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2_-AV5D7gJbiBr59TgdCZhWaJzvymmU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478491034382-2pvvsa606hk1ld24t9jq5gieksv9b7rv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
