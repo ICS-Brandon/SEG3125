@@ -1,9 +1,11 @@
 package com.example.wishy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,10 +71,10 @@ public class CreateAccountActivity extends AppCompatActivity {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-            //Delcaring variables and setting to false
+            //Declaring variables and setting to false
             boolean validUsername = false, validEmail = false, validPassword = false;
 
-            //If statements to check if all paramaters are valid, if so then allow the button to be clicked
+            //If statements to check if all parameters are valid, if so then allow the button to be clicked
             if(userName.getText().toString().length() > 7)
                 validUsername = true;
 
@@ -92,7 +94,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         }
     };
 
-    public void createAccount(){
+    public void createAccount(View view){
+
+
+        Intent intent = new Intent(CreateAccountActivity.this,MainActivity.class);
+        startActivity(intent);
 
         //Getting String references of values in EditText fields for email and password
         final String email = emailAddress.getText().toString().trim();
@@ -118,5 +124,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 }

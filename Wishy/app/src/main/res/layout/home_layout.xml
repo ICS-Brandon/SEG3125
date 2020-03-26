@@ -41,6 +41,7 @@
 
     <Button
         android:id="@+id/helpIcon"
+        android:onClick="openHelp"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="115px"
         android:layout_height="115px"
@@ -52,6 +53,7 @@
 
     <Button
         android:id="@+id/addIcon"
+        android:onClick="addItem"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="115px"
         android:layout_height="115px"
@@ -63,6 +65,7 @@
 
     <Button
         android:id="@+id/settingsIcon"
+        android:onClick="openSettings"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="115px"
         android:layout_height="115px"
@@ -103,5 +106,89 @@
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <ListView
+        android:id="@+id/itemScrollView"
+        android:layout_width="400dp"
+        android:layout_height="630dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toBottomOf="@id/iconBackground"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scrollConstrain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/cardViewBackground"
+                android:layout_width="250dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/card_view" />
+
+            <TextView
+                android:id="@+id/mainTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tag_background"
+                android:padding="2dp"
+                android:text="Clothing"
+                android:textSize="10sp"
+                app:layout_constraintLeft_toLeftOf="@+id/cardViewBackground"
+                app:layout_constraintTop_toTopOf="@+id/cardViewBackground" />
+
+            <TextView
+                android:id="@+id/itemBrand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Hollister Co."
+                android:textColor="#000000"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardViewBackground"
+                app:layout_constraintLeft_toLeftOf="@+id/cardViewBackground" />
+
+            <TextView
+                android:id="@+id/itemPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:text="$39.99"
+                android:textColor="#000000"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardViewBackground"
+                app:layout_constraintLeft_toRightOf="@+id/itemBrand" />
+
+            <Button
+                android:id="@+id/favButton"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="40px"
+                android:layout_height="40px"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/black_favourite_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/cardViewBackground"
+                app:layout_constraintRight_toLeftOf="@+id/editButton" />
+
+            <Button
+                android:id="@+id/editButton"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="40px"
+                android:layout_height="40px"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/black_edit_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/cardViewBackground"
+                app:layout_constraintRight_toRightOf="@+id/cardViewBackground" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

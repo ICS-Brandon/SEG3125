@@ -2,7 +2,9 @@ package com.example.wishy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -28,5 +30,19 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //updateUI(currentUser);
+    }
+
+    public void userLogin(View view){
+
+        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+        startActivity(intent);
+
+    }
+
+    public void accountCreation(View view){
+
+        Intent intent = new Intent(MainActivity.this,CreateAccountActivity.class);
+        startActivity(intent);
+
     }
 }
