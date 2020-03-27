@@ -9,6 +9,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -96,10 +98,6 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     public void createAccount(View view){
 
-
-        Intent intent = new Intent(CreateAccountActivity.this,MainActivity.class);
-        startActivity(intent);
-
         //Getting String references of values in EditText fields for email and password
         final String email = emailAddress.getText().toString().trim();
         final String userPassword = password.getText().toString().trim();
@@ -114,13 +112,16 @@ public class CreateAccountActivity extends AppCompatActivity {
                 //Checks if user was added to auth server, if so user is added to database with additional information
                 if(task.isSuccessful()){
 
+                    FirebaseUser fUser = mAuth.getCurrentUser();
                     Map<String, Object> userInfo = new HashMap<>();
                     userInfo.put("name",name.getText().toString().trim());
                     userInfo.put("username",userName.getText().toString().trim());
                     userInfo.put("email",email);
                     userInfo.put("password",userPassword);
 
-                    myFstore.collection("user_profiles").add(userInfo);
+                    myFstore.collection("user_profiles").document(fUser.getUid()).set(userInfo);
+                    Intent homeIntent = new Intent(CreateAccountActivity.this, HomeActivity.class);
+                    startActivity(homeIntent);
                 }
             }
         });

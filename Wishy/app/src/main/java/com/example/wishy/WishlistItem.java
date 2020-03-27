@@ -1,5 +1,6 @@
 package com.example.wishy;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -11,24 +12,24 @@ public class WishlistItem {
     private double price;
     private String brand, name, mainTag;
     private List<String> tags;
-    private Bitmap imageBitmap;
+    private int imageID;
 
-    public WishlistItem(double p, String b, String n, List<String> t, Bitmap i){
+    public WishlistItem(double p, String b, String n, List<String> t, int i){
         price = p;
         brand = b;
         name = n;
         tags = t;
-        imageBitmap = i;
+        imageID = i;
         if(t.size() > 0)
             mainTag = t.get(0);
     }
 
-    public WishlistItem(double p, String b, String n, Bitmap i){
+    public WishlistItem(double p, String b, String n, int i){
         price = p;
         brand = b;
         name = n;
         tags = new ArrayList<>();
-        imageBitmap = i;
+        imageID = i;
     }
 
     public WishlistItem(double p, String b, String n, List<String> t){
@@ -38,7 +39,7 @@ public class WishlistItem {
         tags = t;
         if(t.size() > 0)
             mainTag = t.get(0);
-        imageBitmap = BitmapFactory.decodeFile("/drawable/test_image.png");
+        imageID = R.drawable.test_image;
     }
 
     public WishlistItem(double p, String b, String n){
@@ -46,7 +47,7 @@ public class WishlistItem {
         brand = b;
         name = n;
         tags = new ArrayList<>();
-        imageBitmap = BitmapFactory.decodeFile("/drawable/test_image.png");
+        imageID = R.drawable.test_image;
     }
 
     public double getPrice(){
@@ -81,12 +82,12 @@ public class WishlistItem {
         tags = t;
     }
 
-    public Bitmap getImageBitmap(){
-        return imageBitmap;
+    public int getImageID(){
+        return imageID;
     }
 
-    public void setImageBitmap(Bitmap i){
-        imageBitmap = i;
+    public void setImageID(int i){
+        imageID = i;
     }
 
     public String getMainTag(){

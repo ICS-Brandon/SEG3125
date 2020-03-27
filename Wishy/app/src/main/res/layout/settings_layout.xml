@@ -42,25 +42,27 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="115px"
         android:layout_height="115px"
-        android:layout_marginRight="55dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginBottom="7dp"
         android:background="@drawable/settings"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="@+id/helpIconSettings" />
+        app:layout_constraintLeft_toRightOf="@+id/addIconSettings" />
 
     <Button
         android:id="@+id/helpIconSettings"
+        android:onClick="helpFromSettings"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="115px"
         android:layout_height="115px"
-        android:layout_marginRight="100dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/help"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintLeft_toRightOf="@+id/settingsIconSettings" />
 
     <Button
         android:id="@+id/homeIconSettings"
+        android:onClick="homeFromSettings"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="115px"
         android:layout_height="115px"
@@ -72,6 +74,7 @@
 
     <Button
         android:id="@+id/addIconSettings"
+        android:onClick="addFromSettings"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="115px"
         android:layout_height="115px"

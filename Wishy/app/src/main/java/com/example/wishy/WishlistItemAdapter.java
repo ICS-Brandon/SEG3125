@@ -1,10 +1,12 @@
 package com.example.wishy;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,11 +32,18 @@ public class WishlistItemAdapter extends ArrayAdapter<WishlistItem> {
         TextView price = convertView.findViewById(R.id.itemPrice);
         TextView brand = convertView.findViewById(R.id.itemBrand);
         TextView mainTag = convertView.findViewWithTag(R.id.mainTag);
+        ImageView background = convertView.findViewById(R.id.cardViewBackground);
 
         price.setText("$"+wishItem.getPrice());
         brand.setText(wishItem.getBrand());
-        mainTag.setText(wishItem.getTags().get(0));
-
+        try {
+            if (wishItem.getTags().get(0) != null) {
+                mainTag.setText(wishItem.getTags().get(0));
+            }
+        }
+        catch(IndexOutOfBoundsException e){
+            System.out.println("Error: no tags");
+        }
         return convertView;
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class WishlistItemSorter {
 
-    public List<WishlistItem> sortselector(String sort, List<WishlistItem> wishItems){
+    public List<WishlistItem> sortSelector(String sort, List<WishlistItem> wishItems){
 
         List<WishlistItem> wishItemsSorted = new ArrayList<>();
 

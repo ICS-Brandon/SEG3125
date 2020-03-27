@@ -88,9 +88,11 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         WishlistItemSorter wishSorter = new WishlistItemSorter();
         //TODO put users items in arraylist
         List<WishlistItem> userItems = new ArrayList<>();
-        userItems = wishSorter.sortselector(sortingBy,userItems);
-        for(WishlistItem w : userItems){
+        userItems = wishSorter.sortSelector(sortingBy,userItems);
+        WishlistItem wishlistItem = new WishlistItem(34.99,"Hollister Co.","Jacket");
+        wishAdapter.add(wishlistItem);
+        /*for(WishlistItem w : userItems){
             wishAdapter.add(w);
-        }
+        }*/
     }
 }
