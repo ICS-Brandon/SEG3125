@@ -6,15 +6,19 @@ import android.graphics.BitmapFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+/* Class that hold the Wishlist item, has several setters, getters, and constructors*/
 
 public class WishlistItem {
 
     private double price;
-    private String brand, name, mainTag;
+    private String brand, name, mainTag, url, wishID;
     private List<String> tags;
     private int imageID;
+    private boolean favourited;
 
-    public WishlistItem(double p, String b, String n, List<String> t, int i){
+    public WishlistItem(double p, String b, String n, String u, List<String> t, int i){
         price = p;
         brand = b;
         name = n;
@@ -22,17 +26,23 @@ public class WishlistItem {
         imageID = i;
         if(t.size() > 0)
             mainTag = t.get(0);
+        favourited = false;
+        wishID = UUID.randomUUID().toString();
+        url = u;
     }
 
-    public WishlistItem(double p, String b, String n, int i){
+    public WishlistItem(double p, String b, String n, String u, int i){
         price = p;
         brand = b;
         name = n;
         tags = new ArrayList<>();
         imageID = i;
+        favourited = false;
+        wishID = UUID.randomUUID().toString();
+        url = u;
     }
 
-    public WishlistItem(double p, String b, String n, List<String> t){
+    public WishlistItem(double p, String b, String n, String u, List<String> t){
         price = p;
         brand = b;
         name = n;
@@ -40,14 +50,20 @@ public class WishlistItem {
         if(t.size() > 0)
             mainTag = t.get(0);
         imageID = R.drawable.test_image;
+        favourited = false;
+        wishID = UUID.randomUUID().toString();
+        url = u;
     }
 
-    public WishlistItem(double p, String b, String n){
+    public WishlistItem(double p, String b, String n, String u){
         price = p;
         brand = b;
         name = n;
         tags = new ArrayList<>();
         imageID = R.drawable.test_image;
+        favourited = false;
+        wishID = UUID.randomUUID().toString();
+        url = u;
     }
 
     public double getPrice(){
@@ -96,5 +112,29 @@ public class WishlistItem {
 
     public void setMainTag(String t){
         mainTag = t;
+    }
+
+    public boolean getFavourited(){
+        return favourited;
+    }
+
+    public void setFavourited(boolean f){
+        favourited = f;
+    }
+
+    public String getWishID(){
+        return wishID;
+    }
+
+    public void setWishID(String s){
+        wishID = s;
+    }
+
+    public String getUrl(){
+        return url;
+    }
+
+    public void setUrl(String u){
+        url = u;
     }
 }

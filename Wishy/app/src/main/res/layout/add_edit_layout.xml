@@ -30,6 +30,7 @@
 
     <Button
         android:id="@+id/homeIconAdd"
+        android:onClick="openHomeActivity"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="115px"
         android:layout_height="115px"
@@ -41,14 +42,15 @@
 
     <Button
         android:id="@+id/helpIconAdd"
+        android:onClick="openHelpActivity"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="115px"
         android:layout_height="115px"
-        android:layout_marginRight="100dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/help"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintLeft_toRightOf="@+id/settingsIconAdd" />
 
     <Button
         android:id="@+id/addIconAdd"
@@ -63,14 +65,15 @@
 
     <Button
         android:id="@+id/settingsIconAdd"
+        android:onClick="openSettingsActivity"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="115px"
         android:layout_height="115px"
-        android:layout_marginLeft="55dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginBottom="7dp"
         android:background="@drawable/settings"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/addIconAdd" />
+        app:layout_constraintLeft_toRightOf="@id/addIconAdd" />
 
     <ImageView
         android:id="@+id/backgroundSeparator"
@@ -114,6 +117,7 @@
 
     <EditText
         android:id="@+id/itemPrice"
+        android:inputType="number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -144,6 +148,7 @@
 
     <Button
         android:id="@+id/deleteButton"
+        android:onClick="deleteItem"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="115px"
         android:layout_height="115px"
@@ -155,6 +160,7 @@
 
     <Button
         android:id="@+id/doneButton"
+        android:onClick="createItem"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="115px"
         android:layout_height="115px"
@@ -166,6 +172,7 @@
 
     <Button
         android:id="@+id/favouriteButton"
+        android:onClick="favItem"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="95px"
         android:layout_height="95px"
@@ -194,5 +201,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemBrand" />
+
+    <ImageView
+        android:id="@+id/wishImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

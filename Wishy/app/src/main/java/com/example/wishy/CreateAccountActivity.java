@@ -21,7 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CreateAccountActivity extends AppCompatActivity {
@@ -29,17 +31,17 @@ public class CreateAccountActivity extends AppCompatActivity {
     //Declaring variables
     private EditText userName, name, emailAddress, password, confirmPassword;
     private Button createAccount;
+    private FirebaseHandler fHandler;
     private FirebaseAuth mAuth;
-    private FirebaseFirestore myFstore;
 
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         setContentView(R.layout.create_account);
 
-        //Initializing Firebase Auth and Database
+        //Initializing Firebase Auth and Firebase Handler
+        fHandler = new FirebaseHandler();
         mAuth = FirebaseAuth.getInstance();
-        myFstore = FirebaseFirestore.getInstance();
 
         //initialize create account button and stop it from being clicked
         createAccount = findViewById(R.id.createAccount);
@@ -112,14 +114,25 @@ public class CreateAccountActivity extends AppCompatActivity {
                 //Checks if user was added to auth server, if so user is added to database with additional information
                 if(task.isSuccessful()){
 
-                    FirebaseUser fUser = mAuth.getCurrentUser();
-                    Map<String, Object> userInfo = new HashMap<>();
+                    WishlistItem testItem = new WishlistItem(34.99,"Hollister","coat","www.google.ca");
+                    WishlistItem testItemTwo = new WishlistItem(40.00,"Asos","Jacket","www.google.ca");
+
+                    List<WishlistItem> testList = new ArrayList<>();
+                    testList.add(testItem);
+                    testList.add(testItemTwo);
+
+                    HashMap<String, Object> userInfo = new HashMap<>();
                     userInfo.put("name",name.getText().toString().trim());
                     userInfo.put("username",userName.getText().toString().trim());
                     userInfo.put("email",email);
                     userInfo.put("password",userPassword);
 
-                    myFstore.collection("user_profiles").document(fUser.getUid()).set(userInfo);
+                    fHandler.setfUser(mAuth.getCurrentUser());
+                    fHandler.addUserInfo(userInfo);
+
+                    for(WishlistItem w : testList){
+                        fHandler.addWishlistItem(w);
+                    }
                     Intent homeIntent = new Intent(CreateAccountActivity.this, HomeActivity.class);
                     startActivity(homeIntent);
                 }

@@ -37,6 +37,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         loadSpinnerOptions();
     }
 
+    //Method to go to Add/Edit activity
     public void addItem(View view){
 
         Intent intent = new Intent(HomeActivity.this,AddEditActivity.class);
@@ -44,6 +45,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
+    //Method to go to Settings activity
     public void openSettings(View view){
 
         Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
@@ -51,6 +53,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
+    //Method to go to Help activity
     public void openHelp(View view){
 
         Intent intent = new Intent(HomeActivity.this,HelpActivity.class);
@@ -58,6 +61,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
+    //Method called when item from the spinner is selected
     @Override
     public void onItemSelected(AdapterView<?> parent, View arg1, int position,long id) {
         String sorting = parent.getItemAtPosition(position).toString().trim();
@@ -69,6 +73,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         //TODO dunno;
     }
 
+    //Method to load the options for the spinner
     public void loadSpinnerOptions(){
         sorter.addOptionsFromUser();
         List<String> options = sorter.getSortOptions();
@@ -82,17 +87,25 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         //TODO get list of wishlisted items to store in arraylist
     }
 
+    //Method to display the wishlist items in the listview
     public void displayItemsBy(String sortingBy){
+
+        //Create new adapter for the listview, set it and create a new sorter for the items
         wishAdapter = new WishlistItemAdapter(this,wishItems);
         wishlistView.setAdapter(wishAdapter);
         WishlistItemSorter wishSorter = new WishlistItemSorter();
+
         //TODO put users items in arraylist
+        //Create arraylist of items, create dummy item and sort array based on user selection
         List<WishlistItem> userItems = new ArrayList<>();
         userItems = wishSorter.sortSelector(sortingBy,userItems);
-        WishlistItem wishlistItem = new WishlistItem(34.99,"Hollister Co.","Jacket");
+        WishlistItem wishlistItem = new WishlistItem(34.99,"Hollister Co.","Jacket","www.google.ca");
+
+        //Add items to the adapter
         wishAdapter.add(wishlistItem);
         /*for(WishlistItem w : userItems){
             wishAdapter.add(w);
         }*/
+
     }
 }

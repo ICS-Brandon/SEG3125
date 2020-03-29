@@ -17,6 +17,7 @@
 
     <Button
         android:id="@+id/favButton"
+        android:onClick="favItem"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="40px"
         android:layout_height="40px"
@@ -40,6 +41,7 @@
 
     <Button
         android:id="@+id/editButton"
+        android:onClick="editItem"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="40px"
         android:layout_height="40px"

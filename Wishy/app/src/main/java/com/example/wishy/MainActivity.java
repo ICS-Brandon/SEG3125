@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
         createAccount = findViewById(R.id.createAccountPortal);
 
+        mAuth.signOut();
+
         if(mAuth.getCurrentUser() != null){
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
