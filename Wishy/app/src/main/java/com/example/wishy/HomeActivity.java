@@ -7,9 +7,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,21 +26,44 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     private WishlistItemAdapter wishAdapter;
     private ArrayList<WishlistItem> wishItems;
     private ListView wishlistView;
+    private FirebaseHandler fHandler;
+    private FirebaseAuth fAuth;
+    private WishlistItemSorter wishSorter;
+    private int sortingBy;
 
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         setContentView(R.layout.home_layout);
 
+        sortingBy = 0;
+
         sortSpinner =  findViewById(R.id.sortSpinner);
         sortSpinner.setOnItemSelectedListener(this);
+        ArrayAdapter<CharSequence> spinAdapter = ArrayAdapter.createFromResource(this,R.array.sortOptions,android.R.layout.simple_spinner_item);
+        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortSpinner.setAdapter(spinAdapter);
 
         wishlistView = findViewById(R.id.itemScrollView);
 
         wishItems = new ArrayList<>();
 
-        getwishItems();
-        loadSpinnerOptions();
+        fHandler = new FirebaseHandler();
+        fAuth = FirebaseAuth.getInstance();
+
+        WishlistItem one = new WishlistItem(34.99,"Hollister","Denim Jacket","www.google.ca");
+        WishlistItem two = new WishlistItem(80.00,"Asos","A Denim Jacket","www.google.ca");
+        wishItems.add(one);
+        wishItems.add(two);
+        wishAdapter = new WishlistItemAdapter(this,wishItems);
+
+        wishlistView.setAdapter(wishAdapter);
+        wishSorter = new WishlistItemSorter();
+        wishAdapter.notifyDataSetChanged();
+
+
+        //getwishItems();
+        //loadSpinnerOptions();
     }
 
     //Method to go to Add/Edit activity
@@ -64,8 +93,15 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     //Method called when item from the spinner is selected
     @Override
     public void onItemSelected(AdapterView<?> parent, View arg1, int position,long id) {
-        String sorting = parent.getItemAtPosition(position).toString().trim();
-        displayItemsBy(sorting);
+
+        if(position == 0){
+
+        }
+        else{
+            sortingBy = position;
+            displayItemsBy(sortingBy);
+        }
+
     }
 
     @Override
@@ -73,39 +109,39 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         //TODO dunno;
     }
 
-    //Method to load the options for the spinner
-    public void loadSpinnerOptions(){
-        sorter.addOptionsFromUser();
-        List<String> options = sorter.getSortOptions();
-
-        ArrayAdapter<String> sortAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,options);
-        sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortSpinner.setAdapter(sortAdapter);
-    }
-
     public void getwishItems(){
         //TODO get list of wishlisted items to store in arraylist
+        /*FirebaseUser fUser = fAuth.getCurrentUser();
+        String id = fUser.getUid();
+        wishItems = fHandler.getAllWishItems(id);
+        wishAdapter.addAll(wishItems);
+        wishAdapter.notifyDataSetChanged();*/
+        WishlistItem one = new WishlistItem(34.99,"Hollister","Denim Jacket","www.google.ca");
+        WishlistItem two = new WishlistItem(80,"Asos","Denim Jacket","www.google.ca");
+        wishAdapter.add(one);
+        wishAdapter.add(two);
+        wishAdapter.notifyDataSetChanged();
     }
 
     //Method to display the wishlist items in the listview
-    public void displayItemsBy(String sortingBy){
+    public void displayItemsBy(int sortingBy){
+        wishItems = wishSorter.sortSelector(sortingBy,wishItems);
+        wishAdapter.notifyDataSetChanged();
+    }
 
-        //Create new adapter for the listview, set it and create a new sorter for the items
-        wishAdapter = new WishlistItemAdapter(this,wishItems);
-        wishlistView.setAdapter(wishAdapter);
-        WishlistItemSorter wishSorter = new WishlistItemSorter();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
 
-        //TODO put users items in arraylist
-        //Create arraylist of items, create dummy item and sort array based on user selection
-        List<WishlistItem> userItems = new ArrayList<>();
-        userItems = wishSorter.sortSelector(sortingBy,userItems);
-        WishlistItem wishlistItem = new WishlistItem(34.99,"Hollister Co.","Jacket","www.google.ca");
+        if(resultCode == 0){
+            WishlistItem item = getIntent().getParcelableExtra("item");
+            Toast.makeText(this,item.getBrand(),Toast.LENGTH_LONG);
+            if(wishItems.contains(item)){
+                Toast.makeText(this,"IT MATCHES",Toast.LENGTH_LONG);
+            }
+            wishItems.remove(item);
+            wishAdapter.notifyDataSetChanged();
+        }
 
-        //Add items to the adapter
-        wishAdapter.add(wishlistItem);
-        /*for(WishlistItem w : userItems){
-            wishAdapter.add(w);
-        }*/
-
+        super.onActivityResult(requestCode,resultCode,data);
     }
 }

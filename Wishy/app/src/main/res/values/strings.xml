@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Wishy</string>
+    <string-array name="sortOptions">
+        <item>Sort By</item>
+        <item>Name</item>
+        <item>Brand</item>
+        <item>Price</item>
+        <item>Favourited</item>
+    </string-array>
 </resources>

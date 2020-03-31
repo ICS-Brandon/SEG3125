@@ -7,21 +7,21 @@ import java.util.List;
 
 public class WishlistItemSorter {
 
-    public List<WishlistItem> sortSelector(String sort, List<WishlistItem> wishItems){
+    public ArrayList<WishlistItem> sortSelector(int sort, ArrayList<WishlistItem> wishItems){
 
-        List<WishlistItem> wishItemsSorted = new ArrayList<>();
+        ArrayList<WishlistItem> wishItemsSorted = new ArrayList<>();
 
         switch(sort){
-            case "name":
+            case 1:
                 wishItemsSorted = sortByName(wishItems);
                 break;
-            case "brand":
+            case 2:
                 wishItemsSorted = sortByBrand(wishItems);
                 break;
-            case "price":
+            case 3:
                 wishItemsSorted = sortByPrice(wishItems);
                 break;
-            case "tags":
+            case 4:
                 wishItemsSorted = sortByTag(wishItems);
                 break;
             default:
@@ -31,7 +31,7 @@ public class WishlistItemSorter {
         return wishItemsSorted;
     }
 
-    public List<WishlistItem> sortByName(List<WishlistItem> wish){
+    public ArrayList<WishlistItem> sortByName(ArrayList<WishlistItem> wish){
         Collections.sort(wish, new Comparator<WishlistItem>() {
             @Override
             public int compare(WishlistItem o1, WishlistItem o2) {
@@ -43,7 +43,7 @@ public class WishlistItemSorter {
         return wish;
     }
 
-    public List<WishlistItem> sortByBrand(List<WishlistItem> wish){
+    public ArrayList<WishlistItem> sortByBrand(ArrayList<WishlistItem> wish){
         Collections.sort(wish, new Comparator<WishlistItem>() {
             @Override
             public int compare(WishlistItem o1, WishlistItem o2) {
@@ -53,7 +53,7 @@ public class WishlistItemSorter {
         return wish;
     }
 
-    public List<WishlistItem> sortByPrice(List<WishlistItem> wish){
+    public ArrayList<WishlistItem> sortByPrice(ArrayList<WishlistItem> wish){
         Comparator<WishlistItem> priceComparator = new Comparator<WishlistItem>(){
             public int compare(WishlistItem o1, WishlistItem o2) {
                 if(o1.getPrice() > o2.getPrice()){
@@ -73,7 +73,7 @@ public class WishlistItemSorter {
         return wish;
     }
 
-    public List<WishlistItem> sortByTag(List<WishlistItem> wish){
+    public ArrayList<WishlistItem> sortByTag(ArrayList<WishlistItem> wish){
         Collections.sort(wish, new Comparator<WishlistItem>() {
             @Override
             public int compare(WishlistItem o1, WishlistItem o2) {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.os.Parcel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WishlistItemAdapter extends ArrayAdapter<WishlistItem> {
 
@@ -47,7 +49,7 @@ public class WishlistItemAdapter extends ArrayAdapter<WishlistItem> {
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(getContext(),AddEditActivity.class);
-                intent.putExtra("id",wishItem.getWishID());
+                intent.putExtra("item",wishItem);
                 ((Activity) getContext()).startActivityForResult(intent,0);
             }
         });
@@ -55,21 +57,30 @@ public class WishlistItemAdapter extends ArrayAdapter<WishlistItem> {
         favButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                wishItem.setFavourited(true);
-                favButton.setBackgroundResource(R.drawable.favourite_icon);
+
+                if(wishItem.getFavourited() == true){
+                    wishItem.setFavourited(false);
+                    favButton.setBackgroundResource(R.drawable.favourite_icon);
+                }
+                else{
+                    wishItem.setFavourited(true);
+                    favButton.setBackgroundResource(R.drawable.favourite_icon);
+                }
             }
         });
 
         price.setText("$"+wishItem.getPrice());
         brand.setText(wishItem.getBrand());
         try {
-            if (wishItem.getTags().get(0) != null) {
+            if (wishItem.getTags().get(0) != null && wishItem.getTags() != null) {
                 mainTag.setText(wishItem.getTags().get(0));
             }
         }
         catch(IndexOutOfBoundsException e){
+            //mainTag.setVisibility(View.INVISIBLE);
             System.out.println("Error: no tags");
         }
         return convertView;
     }
+
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.webkit.WebView;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +35,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private Button createAccount;
     private FirebaseHandler fHandler;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
 
     @Override
     protected void onCreate(Bundle savedInstance){
@@ -42,6 +45,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         //Initializing Firebase Auth and Firebase Handler
         fHandler = new FirebaseHandler();
         mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
 
         //initialize create account button and stop it from being clicked
         createAccount = findViewById(R.id.createAccount);
@@ -113,31 +117,34 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 //Checks if user was added to auth server, if so user is added to database with additional information
                 if(task.isSuccessful()){
-
-                    WishlistItem testItem = new WishlistItem(34.99,"Hollister","coat","www.google.ca");
-                    WishlistItem testItemTwo = new WishlistItem(40.00,"Asos","Jacket","www.google.ca");
-
-                    List<WishlistItem> testList = new ArrayList<>();
-                    testList.add(testItem);
-                    testList.add(testItemTwo);
-
-                    HashMap<String, Object> userInfo = new HashMap<>();
-                    userInfo.put("name",name.getText().toString().trim());
-                    userInfo.put("username",userName.getText().toString().trim());
-                    userInfo.put("email",email);
-                    userInfo.put("password",userPassword);
-
-                    fHandler.setfUser(mAuth.getCurrentUser());
-                    fHandler.addUserInfo(userInfo);
-
-                    for(WishlistItem w : testList){
-                        fHandler.addWishlistItem(w);
-                    }
+                    //addInformation(email,userPassword);
                     Intent homeIntent = new Intent(CreateAccountActivity.this, HomeActivity.class);
                     startActivity(homeIntent);
                 }
             }
         });
 
+    }
+
+    public void addInformation(String email,String userPassword){
+        /*WishlistItem testItem = new WishlistItem(34.99,"Hollister","coat","www.google.ca");
+        WishlistItem testItemTwo = new WishlistItem(40.00,"Asos","Jacket","www.google.ca");
+
+        List<WishlistItem> testList = new ArrayList<>();
+        testList.add(testItem);
+        testList.add(testItemTwo);
+
+        HashMap<String, Object> userInfo = new HashMap<>();
+        userInfo.put("name",name.getText().toString().trim());
+        userInfo.put("username",userName.getText().toString().trim());
+        userInfo.put("email",email);
+        userInfo.put("password",userPassword);
+
+        fHandler.setfUser(mAuth.getCurrentUser());
+        fHandler.addUserInfo(userInfo);
+
+        for(WishlistItem w : testList){
+            fHandler.addWishlistItem(w);
+        }*/
     }
 }

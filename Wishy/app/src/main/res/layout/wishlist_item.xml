@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/cardViewBackground"
@@ -17,13 +17,13 @@
 
     <Button
         android:id="@+id/favButton"
-        android:onClick="favItem"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="40px"
         android:layout_height="40px"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="4dp"
         android:background="@drawable/black_favourite_icon"
+        android:onClick="favItem"
         app:layout_constraintBottom_toBottomOf="@+id/cardViewBackground"
         app:layout_constraintRight_toLeftOf="@+id/editButton" />
 
@@ -41,13 +41,13 @@
 
     <Button
         android:id="@+id/editButton"
-        android:onClick="editItem"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="40px"
         android:layout_height="40px"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="4dp"
         android:background="@drawable/black_edit_icon"
+        android:onClick="editItem"
         app:layout_constraintBottom_toBottomOf="@+id/cardViewBackground"
         app:layout_constraintRight_toRightOf="@+id/cardViewBackground" />
 

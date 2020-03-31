@@ -1,13 +1,20 @@
 package com.example.wishy;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class FirebaseHandler {
 
@@ -15,6 +22,7 @@ public class FirebaseHandler {
     private FirebaseUser fUser;
     private FirebaseAuth fAuth;
     private WishlistItem returnItem;
+    private List<DocumentSnapshot> docSnaps;
 
     public FirebaseHandler(){
         fStore = FirebaseFirestore.getInstance();
@@ -50,16 +58,49 @@ public class FirebaseHandler {
 
     //Add item to the wishlist of a user
     public void addWishlistItem(WishlistItem wishItem){
-        fStore.collection("user_profiles").document(fUser.getUid()).collection("wishlist").document(wishItem.getWishID()).set(wishItem);
+        fStore.collection("user_profiles").document(fUser.getUid()).collection("wishlist").document(wishItem.getWishID()).set(wishItem).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
     }
 
     //Delete item from the wishlist of a user
     public void deleteWishlistItem(WishlistItem wishItem){
-        fStore.collection("user_profiles").document(fUser.getUid()).collection("wishlist").document(wishItem.getWishID()).delete();
+        fStore.collection("user_profiles").document(fUser.getUid()).collection("wishlist").document(wishItem.getWishID()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                return;
+            }
+        });
     }
 
     //Add a user to the database
     public void addUserInfo(HashMap<String,Object> map){
-        fStore.collection("user_profiles").document(fUser.getUid()).set(map);
+        fStore.collection("user_profiles").document(fUser.getUid()).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                return;
+            }
+        });
+    }
+
+    public ArrayList<WishlistItem> getAllWishItems(String uID){
+
+        ArrayList<WishlistItem> wishItems = new ArrayList<>();
+
+        fStore.collection("user_profiles").document(uID).collection("wishlist").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                docSnaps.addAll(task.getResult().getDocuments());
+            }
+        });
+
+        for(DocumentSnapshot s : docSnaps){
+            wishItems.add(s.toObject(WishlistItem.class));
+        }
+
+        return wishItems;
     }
 }

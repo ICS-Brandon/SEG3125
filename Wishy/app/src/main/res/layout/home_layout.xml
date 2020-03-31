@@ -80,7 +80,7 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -109,13 +109,15 @@
 
     <ListView
         android:id="@+id/itemScrollView"
-        android:divider="#FFFFFFFF"
         android:layout_width="400dp"
-        android:layout_height="630dp"
+        android:layout_height="600dp"
         android:layout_marginBottom="60dp"
+        android:divider="#FFFFFFFF"
         app:layout_constraintBottom_toBottomOf="@id/iconBackground"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
+
+
     </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

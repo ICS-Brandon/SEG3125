@@ -3,6 +3,8 @@ package com.example.wishy;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.UUID;
 
 /* Class that hold the Wishlist item, has several setters, getters, and constructors*/
 
-public class WishlistItem {
+public class WishlistItem implements Parcelable {
 
     private double price;
     private String brand, name, mainTag, url, wishID;
@@ -65,6 +67,30 @@ public class WishlistItem {
         wishID = UUID.randomUUID().toString();
         url = u;
     }
+
+    protected WishlistItem(Parcel in) {
+        price = in.readDouble();
+        brand = in.readString();
+        name = in.readString();
+        mainTag = in.readString();
+        url = in.readString();
+        wishID = in.readString();
+        tags = in.createStringArrayList();
+        imageID = in.readInt();
+        favourited = in.readByte() != 0;
+    }
+
+    public static final Creator<WishlistItem> CREATOR = new Creator<WishlistItem>() {
+        @Override
+        public WishlistItem createFromParcel(Parcel in) {
+            return new WishlistItem(in);
+        }
+
+        @Override
+        public WishlistItem[] newArray(int size) {
+            return new WishlistItem[size];
+        }
+    };
 
     public double getPrice(){
         return price;
@@ -136,5 +162,23 @@ public class WishlistItem {
 
     public void setUrl(String u){
         url = u;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(price);
+        dest.writeString(brand);
+        dest.writeString(name);
+        dest.writeString(mainTag);
+        dest.writeString(url);
+        dest.writeString(wishID);
+        dest.writeStringList(tags);
+        dest.writeInt(imageID);
+        dest.writeByte((byte) (favourited ? 1 : 0));
     }
 }

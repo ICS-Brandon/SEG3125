@@ -18,7 +18,7 @@ public class AddEditActivity extends AppCompatActivity {
 
     private FirebaseHandler fHandler;
     private FirebaseAuth fAuth;
-    private String wishId;
+    private WishlistItem wishItem;
     private EditText urlInput, itemName, itemPrice, itemBrand;
     private Button doneButton, deleteButton, favButton;
     private ImageView imageView;
@@ -57,7 +57,7 @@ public class AddEditActivity extends AppCompatActivity {
 
         //Getting intent passed from previous activity
         Intent getIntent = getIntent();
-        wishId = getIntent.getStringExtra("id");
+        wishItem = getIntent.getParcelableExtra("item");
 
         /*if(wishId == null){
             Toast.makeText(getApplicationContext(),"Error: No Wishlist Item Found",Toast.LENGTH_LONG);
@@ -69,7 +69,7 @@ public class AddEditActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
 
         //Checking if the activity is being used to add an item or edit one
-        if(wishId.equals("null")){
+        if(wishItem == null){
             editItem = false;
         }
         else{
@@ -110,7 +110,15 @@ public class AddEditActivity extends AppCompatActivity {
     public void favItem(View view){
 
         //Get wishlist item to edit
-        WishlistItem item = fHandler.getWishlistItem(wishId);
+
+        if(wishItem.getFavourited() == true){
+            wishItem.setFavourited(false);
+        }
+        else{
+            wishItem.setFavourited(true);
+        }
+
+        /*WishlistItem item = fHandler.getWishlistItem(wishItem.getWishID());
 
         //TODO add highlighted fav icon
         //Checks if it's favourited or not and toggles it and updates the database
@@ -121,7 +129,7 @@ public class AddEditActivity extends AppCompatActivity {
             item.setFavourited(false);
             fHandler.addWishlistItem(item);
             favButton.setBackgroundResource(R.drawable.favourite_icon);
-        }
+        }*/
 
     }
 
@@ -130,8 +138,11 @@ public class AddEditActivity extends AppCompatActivity {
     public void deleteItem(View view){
 
         //Get item from database and then delete it
-        WishlistItem item = fHandler.getWishlistItem(wishId);
-        fHandler.deleteWishlistItem(item);
+        //WishlistItem item = fHandler.getWishlistItem(wishId);
+        //fHandler.deleteWishlistItem(item);
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("item",wishItem);
+        setResult(0,returnIntent);
         finish();
 
     }
@@ -142,7 +153,7 @@ public class AddEditActivity extends AppCompatActivity {
         //Convert price into double value and create wishlist item to add
         double priceDouble = Double.parseDouble(price);
         WishlistItem wishlistItem = new WishlistItem(priceDouble,brand,name,url);
-        fHandler.addWishlistItem(wishlistItem);
+        //fHandler.addWishlistItem(wishlistItem);
         finish();
 
     }
@@ -154,14 +165,13 @@ public class AddEditActivity extends AppCompatActivity {
         FirebaseUser fUser = fAuth.getCurrentUser();
         fHandler.setfUser(fUser);
 
-        WishlistItem item = fHandler.getWishlistItem(wishId);
 
-        urlInput.setText(item.getUrl());
-        itemName.setText(item.getName());
-        itemBrand.setText(item.getBrand());
-        itemPrice.setText(String.valueOf(item.getPrice()));
+        urlInput.setText(wishItem.getUrl());
+        itemName.setText(wishItem.getName());
+        itemBrand.setText(wishItem.getBrand());
+        itemPrice.setText(String.valueOf(wishItem.getPrice()));
 
-        if(item.getFavourited() == true){
+        if(wishItem.getFavourited() == true){
             favButton.setBackgroundResource(R.drawable.favourite_icon);
         }
 

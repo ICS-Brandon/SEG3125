@@ -25,5 +25,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
     public void helpFromSettings(View view){
         Intent returnIntent = new Intent(SettingsActivity.this,HelpActivity.class);
+        startActivity(returnIntent);
     }
 }
