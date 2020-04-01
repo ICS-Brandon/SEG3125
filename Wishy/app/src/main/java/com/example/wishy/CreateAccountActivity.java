@@ -28,6 +28,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ir.hatamiarash.toast.RTLToast;
+
 public class CreateAccountActivity extends AppCompatActivity {
 
     //Declaring variables
@@ -49,7 +51,6 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         //initialize create account button and stop it from being clicked
         createAccount = findViewById(R.id.createAccount);
-        createAccount.setClickable(false);
 
         //Initializing EditText fields and assigning a text watcher
         userName = findViewById(R.id.usernameEditAccount);
@@ -78,73 +79,70 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            //Declaring variables and setting to false
-            boolean validUsername = false, validEmail = false, validPassword = false;
-
-            //If statements to check if all parameters are valid, if so then allow the button to be clicked
-            if(userName.getText().toString().length() > 7)
-                validUsername = true;
-
-            if(Patterns.EMAIL_ADDRESS.matcher(emailAddress.getText().toString()).matches())
-                validEmail = true;
-
-            if(password.getText().toString().equals(confirmPassword.getText().toString()) && password.getText().toString().length() > 6)
-                validPassword = true;
-
-            if(validUsername && validEmail && validPassword)
-                createAccount.setClickable(true);
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-
         }
     };
 
     public void createAccount(View view){
 
-        //Getting String references of values in EditText fields for email and password
-        final String email = emailAddress.getText().toString().trim();
-        final String userPassword = password.getText().toString().trim();
+        boolean createValid = checkValid();
 
-        //Creating user on Auth server with given email and password
-        //TODO add check to see if user already exists with that email
-        mAuth.createUserWithEmailAndPassword(email,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        if(createValid){
+            //Getting String references of values in EditText fields for email and password
+            final String email = emailAddress.getText().toString().trim();
+            final String userPassword = password.getText().toString().trim();
 
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            //Creating user on Auth server with given email and password
+            //TODO add check to see if user already exists with that email
+            mAuth.createUserWithEmailAndPassword(email,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
-                //Checks if user was added to auth server, if so user is added to database with additional information
-                if(task.isSuccessful()){
-                    //addInformation(email,userPassword);
-                    Intent homeIntent = new Intent(CreateAccountActivity.this, HomeActivity.class);
-                    startActivity(homeIntent);
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+
+                    //Checks if user was added to auth server, if so user is added to database with additional information
+                    if(task.isSuccessful()){
+                        //addInformation(email,userPassword);
+                        Intent homeIntent = new Intent(CreateAccountActivity.this, HomeActivity.class);
+                        startActivity(homeIntent);
+                    }
+                    else{
+                        RTLToast.error(getApplicationContext(),"Email is already in use, please try a different email",Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }
 
     }
 
-    public void addInformation(String email,String userPassword){
-        /*WishlistItem testItem = new WishlistItem(34.99,"Hollister","coat","www.google.ca");
-        WishlistItem testItemTwo = new WishlistItem(40.00,"Asos","Jacket","www.google.ca");
+    public boolean checkValid(){
 
-        List<WishlistItem> testList = new ArrayList<>();
-        testList.add(testItem);
-        testList.add(testItemTwo);
+        RTLToast.Config.getInstance().setTextSize(10).apply();
 
-        HashMap<String, Object> userInfo = new HashMap<>();
-        userInfo.put("name",name.getText().toString().trim());
-        userInfo.put("username",userName.getText().toString().trim());
-        userInfo.put("email",email);
-        userInfo.put("password",userPassword);
+        //Declaring variables and setting to false
+        boolean validUsername = false, validEmail = false, validPassword = false;
 
-        fHandler.setfUser(mAuth.getCurrentUser());
-        fHandler.addUserInfo(userInfo);
+        //If statements to check if all parameters are valid, if so then allow the button to be clicked
+        if(userName.getText().toString().length() > 3)
+            validUsername = true;
+        else if(getCurrentFocus().getId() == userName.getId())
+            RTLToast.warning(getApplicationContext(),"Username is too short, please have a username longer than 3 characters",Toast.LENGTH_SHORT).show();
 
-        for(WishlistItem w : testList){
-            fHandler.addWishlistItem(w);
-        }*/
+        if(Patterns.EMAIL_ADDRESS.matcher(emailAddress.getText().toString()).matches())
+            validEmail = true;
+        else if(getCurrentFocus().getId() == emailAddress.getId())
+            RTLToast.warning(getApplicationContext(),"Not a valid email address",Toast.LENGTH_SHORT).show();
+
+        if(password.getText().toString().equals(confirmPassword.getText().toString()) && password.getText().toString().length() > 6)
+            validPassword = true;
+        else if(getCurrentFocus().getId() == password.getId() || getCurrentFocus().getId() == confirmPassword.getId())
+            RTLToast.warning(getApplicationContext(),"Passwords do not match",Toast.LENGTH_SHORT).show();
+
+        if(validUsername && validEmail && validPassword)
+            return true;
+        else
+            return false;
     }
 }

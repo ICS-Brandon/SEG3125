@@ -2,9 +2,11 @@ package com.example.wishy;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private Spinner sortSpinner;
     private SpinnerHandler sorter = new SpinnerHandler();
+    private EditText searchBar;
     private WishlistItemAdapter wishAdapter;
     private ArrayList<WishlistItem> wishItems;
     private ListView wishlistView;
@@ -37,6 +40,8 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.home_layout);
 
         sortingBy = 0;
+
+        searchBar = findViewById(R.id.searchBar);
 
         sortSpinner =  findViewById(R.id.sortSpinner);
         sortSpinner.setOnItemSelectedListener(this);
@@ -132,13 +137,39 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
 
+        Log.d("INFORMATION",resultCode + " INTENT: " + data);
+
         if(resultCode == 0){
-            WishlistItem item = getIntent().getParcelableExtra("item");
-            Toast.makeText(this,item.getBrand(),Toast.LENGTH_LONG);
-            if(wishItems.contains(item)){
-                Toast.makeText(this,"IT MATCHES",Toast.LENGTH_LONG);
+            WishlistItem removeItem = null;
+            WishlistItem item = data.getParcelableExtra("item");
+            for(WishlistItem w: wishItems){
+                if (w.getWishID().equals(item.getWishID())) {
+                    removeItem = w;
+                }
             }
-            wishItems.remove(item);
+            if(removeItem != null){
+                wishItems.remove(removeItem);
+            }
+            wishAdapter.notifyDataSetChanged();
+        }
+        else if(resultCode == 1){
+            WishlistItem item = data.getParcelableExtra("item");
+            WishlistItem removeItem = null;
+            for(WishlistItem w : wishItems){
+                if(w.getWishID().equals(item.getWishID())){
+                    removeItem = w;
+                }
+            }
+
+            if(removeItem != null){
+                wishItems.remove(removeItem);
+                wishItems.add(item);
+            }
+            wishAdapter.notifyDataSetChanged();
+        }
+        else if(resultCode == -1){
+            WishlistItem item = data.getParcelableExtra("item");
+            wishItems.add(item);
             wishAdapter.notifyDataSetChanged();
         }
 

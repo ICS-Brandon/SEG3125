@@ -10,9 +10,12 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import ir.hatamiarash.toast.RTLToast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Button login, createAccount;
     private FirebaseAuth mAuth;
     private String email, password;
+    private boolean validEmail, validPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
         createAccount = findViewById(R.id.createAccountPortal);
 
+        mAuth.signOut();
+
         if(mAuth.getCurrentUser() != null){
             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(intent);
@@ -45,13 +51,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void userLogin(View view){
 
-        email = emailEdit.getText().toString().trim();
-        password = passwordEdit.getText().toString().trim();
+        if(validEmail && validPassword){
+            email = emailEdit.getText().toString().trim();
+            password = passwordEdit.getText().toString().trim();
 
-        mAuth.signInWithEmailAndPassword(email,password);
+            mAuth.signInWithEmailAndPassword(email,password);
 
-        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-        startActivity(intent);
+            Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+            startActivity(intent);
+        }
+        else{
+            RTLToast.Config.getInstance().setTextSize(10).apply();
+            RTLToast.warning(getApplicationContext(),"Email and Password are not valid", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -72,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             //Declaring variables and setting to false
-            boolean validEmail = false, validPassword = false;
+            validEmail = false;
+            validPassword = false;
 
             //If statements to check if all parameters are valid, if so then allow the button to be clicked
             if(Patterns.EMAIL_ADDRESS.matcher(emailEdit.getText().toString()).matches())
