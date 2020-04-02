@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import ir.hatamiarash.toast.RTLToast;
+
 public class AddEditActivity extends AppCompatActivity {
 
     private FirebaseHandler fHandler;
@@ -33,6 +35,8 @@ public class AddEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         setContentView(R.layout.add_edit_layout);
+
+        RTLToast.Config.getInstance().setTextSize(10).apply();
 
         addItem = false;
 
@@ -149,28 +153,31 @@ public class AddEditActivity extends AppCompatActivity {
 
         //Convert price into double value and create wishlist item to add
         if(addItem && !editItem){
-            WishlistItem testItem = new WishlistItem(price,brand,name,url);
-            if(isEmptyString(tag)){
-                testItem.setMainTag(tag);
-            }
-            Intent testIntent = new Intent();
-            testIntent.putExtra("item",testItem);
-            setResult(-1,testIntent);
-            finish();
+            addItemToList();
         }
         else if(addItem && editItem){
-            WishlistItem wishlistItem = new WishlistItem(price,brand,name,url);
-            wishlistItem.setFavourited(favourited);
-            if(isEmptyString(tag)){
-                wishlistItem.setMainTag(tag);
-            }
-            wishlistItem.setWishID(wishItem.getWishID());
-            Intent returnIntent = new Intent();
-            returnIntent.putExtra("item",wishlistItem);
-            setResult(1,returnIntent);
-            finish();
+            editItemInList();
         }
 
+    }
+
+    public void addItemToList(){
+        WishlistItem testItem = new WishlistItem(price,brand,name,url);
+        testItem.setMainTag(tag);
+        Intent testIntent = new Intent();
+        testIntent.putExtra("item",testItem);
+        setResult(-1,testIntent);
+        finish();
+    }
+
+    public void editItemInList(){
+        WishlistItem wishlistItem = new WishlistItem(price,brand,name,url);
+        wishlistItem.setMainTag(tag);
+        wishlistItem.setWishID(wishItem.getWishID());
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("item",wishlistItem);
+        setResult(1,returnIntent);
+        finish();
     }
 
     //Method to populate the EditText fields if being used to edit
@@ -184,6 +191,7 @@ public class AddEditActivity extends AppCompatActivity {
         itemName.setText(wishItem.getName());
         itemBrand.setText(wishItem.getBrand());
         itemPrice.setText(String.valueOf(wishItem.getPrice()));
+        itemTag.setText(wishItem.getMainTag());
 
     }
 
@@ -235,6 +243,8 @@ public class AddEditActivity extends AppCompatActivity {
                         addItem = true;
                     }
                 }
+                else
+                    RTLToast.warning(getApplicationContext(),"Warning: Cannot have empty fields",Toast.LENGTH_SHORT);
             }
             else if(!editItem){
                 if(isEmptyString(name) && isEmptyString(brand) && isEmptyString(priceString) && isEmptyString(url)) {

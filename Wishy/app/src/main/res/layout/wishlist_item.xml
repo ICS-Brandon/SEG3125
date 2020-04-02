@@ -30,13 +30,13 @@
         android:id="@+id/itemPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginBottom="5dp"
         android:text="$39.99"
         android:textColor="#000000"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/cardViewBackground"
-        app:layout_constraintLeft_toRightOf="@+id/itemBrand" />
+        app:layout_constraintLeft_toRightOf="@+id/itemName" />
 
     <Button
         android:id="@+id/editButton"
@@ -60,17 +60,42 @@
         android:textColor="#000000"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/cardViewBackground"
-        app:layout_constraintLeft_toLeftOf="@+id/cardViewBackground" />
+        app:layout_constraintLeft_toLeftOf="@+id/cardViewBackground"
+        app:layout_constraintRight_toLeftOf="@+id/itemName"/>
 
     <TextView
-        android:id="@+id/mainTag2"
+        android:id="@+id/itemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/tag_background"
-        android:padding="2dp"
-        android:text="Clothing"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="Denim Jacket"
+        android:textColor="#000000"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardViewBackground"
+        app:layout_constraintLeft_toRightOf="@+id/itemBrand"
+        app:layout_constraintRight_toLeftOf="@+id/itemPrice" />
+
+    <TextView
+        android:id="@+id/itemTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="2dp"
+        android:text="TESTING"
+        android:textColor="#000000"
         android:textSize="10sp"
         app:layout_constraintLeft_toLeftOf="@+id/cardViewBackground"
-        app:layout_constraintTop_toTopOf="@+id/cardViewBackground" />
+        app:layout_constraintTop_toTopOf="@id/cardViewBackground"/>
+
+    <ImageView
+        android:id="@+id/itemView"
+        android:layout_width="400px"
+        android:layout_height="350px"
+        android:layout_marginTop="25dp"
+        app:layout_constraintLeft_toLeftOf="@id/cardViewBackground"
+        app:layout_constraintRight_toRightOf="@id/cardViewBackground"
+        app:layout_constraintTop_toTopOf="@id/cardViewBackground"
+        app:srcCompat="@drawable/card_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

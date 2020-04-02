@@ -18,9 +18,8 @@ import java.util.ArrayList;
 
 public class WishlistItemAdapter extends ArrayAdapter<WishlistItem> {
 
-    private TextView price, brand;
-    private TextView mainTag;
-    private ImageView background;
+    private TextView price, brand, name, tag;
+    private ImageView background, itemImage;
     private Button editButton, favButton;
     private Context mContext;
     private ArrayList<WishlistItem> wishlistItems;
@@ -48,17 +47,20 @@ public class WishlistItemAdapter extends ArrayAdapter<WishlistItem> {
 
         price = convertView.findViewById(R.id.itemPrice);
         brand = convertView.findViewById(R.id.itemBrand);
-        mainTag = convertView.findViewWithTag(R.id.mainTag2);
+        name = convertView.findViewById(R.id.itemName);
+        tag = convertView.findViewById(R.id.itemTag);
         background = convertView.findViewById(R.id.cardViewBackground);
+        itemImage = convertView.findViewById(R.id.itemView);
         editButton = convertView.findViewById(R.id.editButton);
         favButton = convertView.findViewById(R.id.favButton);
 
-        if(wishItem.getFavourited()){
-            favButton.setBackgroundResource(R.drawable.black_favourite_icon_filled);
+        if(wishItem.getFavourited() == true){
+            Log.d("FAV","made it to changing resource");
+            favButton.setBackgroundResource(R.drawable.black_fav_filled);
         }
         else{
-        }
             favButton.setBackgroundResource(R.drawable.black_favourite_icon);
+        }
 
         editButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -74,18 +76,20 @@ public class WishlistItemAdapter extends ArrayAdapter<WishlistItem> {
             public void onClick(View view){
                 if(wishItem.getFavourited()){
                     wishItem.setFavourited(false);
-                    setUnFavourited();
+                    setItemUnfavourited();
                 }
                 else{
                     wishItem.setFavourited(true);
-                    setFavourited();
+                    setItemFavourited();
                 }
             }
         });
 
         price.setText("$"+wishItem.getPrice());
-        brand.setText(wishItem.getBrand());
-
+        brand.setText(wishItem.getBrand() + ": ");
+        name.setText(wishItem.getName());
+        tag.setText(wishItem.getMainTag());
+        itemImage.setImageResource(wishItem.getImageID());
         return convertView;
     }
 
@@ -118,11 +122,11 @@ public class WishlistItemAdapter extends ArrayAdapter<WishlistItem> {
         }
     }
 
-    public void setFavourited(){
-        favButton.setBackgroundResource(R.drawable.black_favourite_icon_filled);
+    public void setItemFavourited(){
+        favButton.setBackgroundResource(R.drawable.black_fav_filled);
     }
 
-    public void setUnFavourited(){
+    public void setItemUnfavourited(){
         favButton.setBackgroundResource(R.drawable.black_favourite_icon);
     }
 }

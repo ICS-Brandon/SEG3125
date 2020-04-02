@@ -38,7 +38,7 @@ public class WishlistItem implements Parcelable {
         favourited = false;
         wishID = UUID.randomUUID().toString();
         url = u;
-        mainTag = " ";
+        mainTag = "";
     }
 
     public WishlistItem(double p, String b, String n, String u, String t){
@@ -60,7 +60,7 @@ public class WishlistItem implements Parcelable {
         favourited = false;
         wishID = UUID.randomUUID().toString();
         url = u;
-        mainTag = " ";
+        mainTag = "";
     }
 
     protected WishlistItem(Parcel in) {

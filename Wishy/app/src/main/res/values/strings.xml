@@ -5,6 +5,6 @@
         <item>Name</item>
         <item>Brand</item>
         <item>Price</item>
-        <item>Favourited</item>
+        <item>Tag</item>
     </string-array>
 </resources>

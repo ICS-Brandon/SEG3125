@@ -60,6 +60,8 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         fAuth = FirebaseAuth.getInstance();
 
         WishlistItem one = new WishlistItem(34.99,"Hollister","The Denim Jacket","www.google.ca","TEST");
+        one.setFavourited(true);
+        one.setImageID(R.drawable.download);
         WishlistItem two = new WishlistItem(80.00,"Asos","A Denim Jacket","www.google.ca");
         WishlistItem three = new WishlistItem(99.99,"Holly","Denim Jacket","www.google.ca");
         wishItems.add(three);
@@ -76,7 +78,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     public void addItem(View view){
 
         Intent intent = new Intent(HomeActivity.this,AddEditActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent,0);
 
     }
 
@@ -152,11 +154,13 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
                 wishItems.remove(removeItem);
                 wishItems.add(item);
             }
+            wishItems = wishSorter.sortSelector(sortingBy,wishItems);
             wishAdapter.notifyDataSetChanged();
         }
         else if(resultCode == -1){
             WishlistItem item = data.getParcelableExtra("item");
             wishItems.add(item);
+            wishItems = wishSorter.sortSelector(sortingBy,wishItems);
             wishAdapter.notifyDataSetChanged();
         }
 
