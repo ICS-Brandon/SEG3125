@@ -22,7 +22,7 @@ public class WishlistItemSorter {
                 wishItemsSorted = sortByPrice(wishItems);
                 break;
             case 4:
-                wishItemsSorted = sortByTag(wishItems);
+                wishItemsSorted = sortByFavourite(wishItems);
                 break;
             default:
                 break;
@@ -73,11 +73,11 @@ public class WishlistItemSorter {
         return wish;
     }
 
-    public ArrayList<WishlistItem> sortByTag(ArrayList<WishlistItem> wish){
+    public ArrayList<WishlistItem> sortByFavourite(ArrayList<WishlistItem> wish){
         Collections.sort(wish, new Comparator<WishlistItem>() {
             @Override
             public int compare(WishlistItem o1, WishlistItem o2) {
-                return o1.getMainTag().compareTo(o2.getMainTag());
+                return Boolean.compare(o1.getFavourited(),o2.getFavourited());
             }
         });
 

@@ -16,19 +16,16 @@ public class WishlistItem implements Parcelable {
 
     private double price;
     private String brand, name, mainTag, url, wishID;
-    private List<String> tags;
     private int imageID;
     private boolean favourited;
 
-    public WishlistItem(double p, String b, String n, String u, List<String> t, int i){
+    public WishlistItem(double p, String b, String n, String u, String t, int i){
         price = p;
         brand = b;
         name = n;
-        tags = t;
         imageID = i;
-        if(t.size() > 0)
-            mainTag = t.get(0);
         favourited = false;
+        mainTag = t;
         wishID = UUID.randomUUID().toString();
         url = u;
     }
@@ -37,20 +34,18 @@ public class WishlistItem implements Parcelable {
         price = p;
         brand = b;
         name = n;
-        tags = new ArrayList<>();
         imageID = i;
         favourited = false;
         wishID = UUID.randomUUID().toString();
         url = u;
+        mainTag = " ";
     }
 
-    public WishlistItem(double p, String b, String n, String u, List<String> t){
+    public WishlistItem(double p, String b, String n, String u, String t){
         price = p;
         brand = b;
         name = n;
-        tags = t;
-        if(t.size() > 0)
-            mainTag = t.get(0);
+        mainTag = t;
         imageID = R.drawable.test_image;
         favourited = false;
         wishID = UUID.randomUUID().toString();
@@ -61,11 +56,11 @@ public class WishlistItem implements Parcelable {
         price = p;
         brand = b;
         name = n;
-        tags = new ArrayList<>();
         imageID = R.drawable.test_image;
         favourited = false;
         wishID = UUID.randomUUID().toString();
         url = u;
+        mainTag = " ";
     }
 
     protected WishlistItem(Parcel in) {
@@ -75,7 +70,6 @@ public class WishlistItem implements Parcelable {
         mainTag = in.readString();
         url = in.readString();
         wishID = in.readString();
-        tags = in.createStringArrayList();
         imageID = in.readInt();
         favourited = in.readByte() != 0;
     }
@@ -114,14 +108,6 @@ public class WishlistItem implements Parcelable {
 
     public void setName(String n){
         name = n;
-    }
-
-    public List<String> getTags(){
-        return tags;
-    }
-
-    public void setTags(List<String> t){
-        tags = t;
     }
 
     public int getImageID(){
@@ -177,7 +163,6 @@ public class WishlistItem implements Parcelable {
         dest.writeString(mainTag);
         dest.writeString(url);
         dest.writeString(wishID);
-        dest.writeStringList(tags);
         dest.writeInt(imageID);
         dest.writeByte((byte) (favourited ? 1 : 0));
     }

@@ -3,8 +3,7 @@ package com.example.wishy;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.os.Parcel;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +15,25 @@ import androidx.annotation.NonNull;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class WishlistItemAdapter extends ArrayAdapter<WishlistItem> {
 
-    private TextView price, brand, mainTag;
+    private TextView price, brand;
+    private TextView mainTag;
     private ImageView background;
     private Button editButton, favButton;
+    private Context mContext;
+    private ArrayList<WishlistItem> wishlistItems;
+    private ArrayList<WishlistItem> holderList;
+    private WishlistItemSorter wSorter;
 
     public WishlistItemAdapter(Context context, ArrayList<WishlistItem> wishArray){
         super(context, 0, wishArray);
+        mContext = getContext();
+        wishlistItems = wishArray;
+        holderList = new ArrayList<>();
+        holderList.addAll(wishlistItems);
+        wSorter = new WishlistItemSorter();
     }
 
     @NonNull
@@ -40,10 +48,17 @@ public class WishlistItemAdapter extends ArrayAdapter<WishlistItem> {
 
         price = convertView.findViewById(R.id.itemPrice);
         brand = convertView.findViewById(R.id.itemBrand);
-        mainTag = convertView.findViewWithTag(R.id.mainTag);
+        mainTag = convertView.findViewWithTag(R.id.mainTag2);
         background = convertView.findViewById(R.id.cardViewBackground);
         editButton = convertView.findViewById(R.id.editButton);
         favButton = convertView.findViewById(R.id.favButton);
+
+        if(wishItem.getFavourited()){
+            favButton.setBackgroundResource(R.drawable.black_favourite_icon_filled);
+        }
+        else{
+        }
+            favButton.setBackgroundResource(R.drawable.black_favourite_icon);
 
         editButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -57,30 +72,57 @@ public class WishlistItemAdapter extends ArrayAdapter<WishlistItem> {
         favButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-
-                if(wishItem.getFavourited() == true){
+                if(wishItem.getFavourited()){
                     wishItem.setFavourited(false);
-                    favButton.setBackgroundResource(R.drawable.favourite_icon);
+                    setUnFavourited();
                 }
                 else{
                     wishItem.setFavourited(true);
-                    favButton.setBackgroundResource(R.drawable.favourite_icon);
+                    setFavourited();
                 }
             }
         });
 
         price.setText("$"+wishItem.getPrice());
         brand.setText(wishItem.getBrand());
-        try {
-            if (wishItem.getTags().get(0) != null && wishItem.getTags() != null) {
-                mainTag.setText(wishItem.getTags().get(0));
-            }
-        }
-        catch(IndexOutOfBoundsException e){
-            //mainTag.setVisibility(View.INVISIBLE);
-            System.out.println("Error: no tags");
-        }
+
         return convertView;
     }
 
+    public void filterBySearch(String searchKey, int searchBy) {
+        searchKey = searchKey.toLowerCase();
+        wishlistItems.clear();
+        if (searchKey.length() == 0) {
+            wishlistItems.addAll(holderList);
+            notifyDataSetChanged();
+        } else {
+
+            if(searchBy == 1){
+                for (WishlistItem w : holderList) {
+                    if (w.getName().toLowerCase().indexOf(searchKey) != -1) {
+                        wishlistItems.add(w);
+                    }
+                    wishlistItems = wSorter.sortSelector(searchBy, wishlistItems);
+                    notifyDataSetChanged();
+                }
+            }
+            else if(searchBy == 2){
+                for (WishlistItem w : holderList) {
+                    if (w.getBrand().toLowerCase().indexOf(searchKey) != -1) {
+                        wishlistItems.add(w);
+                    }
+                    wishlistItems = wSorter.sortSelector(searchBy, wishlistItems);
+                    notifyDataSetChanged();
+                }
+            }
+        }
+    }
+
+    public void setFavourited(){
+        favButton.setBackgroundResource(R.drawable.black_favourite_icon_filled);
+    }
+
+    public void setUnFavourited(){
+        favButton.setBackgroundResource(R.drawable.black_favourite_icon);
+    }
 }

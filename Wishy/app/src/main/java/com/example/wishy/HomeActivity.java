@@ -2,6 +2,8 @@ package com.example.wishy;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,6 +44,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         sortingBy = 0;
 
         searchBar = findViewById(R.id.searchBar);
+        searchBar.addTextChangedListener(itemSearch);
 
         sortSpinner =  findViewById(R.id.sortSpinner);
         sortSpinner.setOnItemSelectedListener(this);
@@ -56,8 +59,10 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         fHandler = new FirebaseHandler();
         fAuth = FirebaseAuth.getInstance();
 
-        WishlistItem one = new WishlistItem(34.99,"Hollister","Denim Jacket","www.google.ca");
+        WishlistItem one = new WishlistItem(34.99,"Hollister","The Denim Jacket","www.google.ca","TEST");
         WishlistItem two = new WishlistItem(80.00,"Asos","A Denim Jacket","www.google.ca");
+        WishlistItem three = new WishlistItem(99.99,"Holly","Denim Jacket","www.google.ca");
+        wishItems.add(three);
         wishItems.add(one);
         wishItems.add(two);
         wishAdapter = new WishlistItemAdapter(this,wishItems);
@@ -65,10 +70,6 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         wishlistView.setAdapter(wishAdapter);
         wishSorter = new WishlistItemSorter();
         wishAdapter.notifyDataSetChanged();
-
-
-        //getwishItems();
-        //loadSpinnerOptions();
     }
 
     //Method to go to Add/Edit activity
@@ -100,7 +101,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> parent, View arg1, int position,long id) {
 
         if(position == 0){
-
+            sortingBy = 2;
         }
         else{
             sortingBy = position;
@@ -112,20 +113,6 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> arg0){
         //TODO dunno;
-    }
-
-    public void getwishItems(){
-        //TODO get list of wishlisted items to store in arraylist
-        /*FirebaseUser fUser = fAuth.getCurrentUser();
-        String id = fUser.getUid();
-        wishItems = fHandler.getAllWishItems(id);
-        wishAdapter.addAll(wishItems);
-        wishAdapter.notifyDataSetChanged();*/
-        WishlistItem one = new WishlistItem(34.99,"Hollister","Denim Jacket","www.google.ca");
-        WishlistItem two = new WishlistItem(80,"Asos","Denim Jacket","www.google.ca");
-        wishAdapter.add(one);
-        wishAdapter.add(two);
-        wishAdapter.notifyDataSetChanged();
     }
 
     //Method to display the wishlist items in the listview
@@ -175,4 +162,21 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
 
         super.onActivityResult(requestCode,resultCode,data);
     }
+
+    private TextWatcher itemSearch = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String searchKey = searchBar.getText().toString().trim();
+            wishAdapter.filterBySearch(searchKey,sortingBy);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
 }

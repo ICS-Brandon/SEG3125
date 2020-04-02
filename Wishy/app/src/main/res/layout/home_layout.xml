@@ -88,11 +88,12 @@
 
     <EditText
         android:id="@+id/searchBar"
+        android:textColor="#FFFFFF"
         android:layout_width="700px"
         android:layout_height="100px"
         android:layout_marginRight="5dp"
         android:background="@drawable/search_bar"
-        android:paddingLeft="15dp"
+        android:paddingLeft="25dp"
         android:paddingRight="5dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
