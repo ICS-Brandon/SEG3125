@@ -1,7 +1,13 @@
 package com.example.wishy;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -16,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import ir.hatamiarash.toast.RTLToast;
 
@@ -25,10 +32,11 @@ public class AddEditActivity extends AppCompatActivity {
     private FirebaseAuth fAuth;
     private WishlistItem wishItem;
     private EditText urlInput, itemName, itemPrice, itemBrand, itemTag;
-    private Button doneButton, deleteButton, favButton;
+    private Button doneButton, deleteButton, favButton, editImage;
     private ImageView imageView;
     private String name,brand,url, tag;
     private Double price;
+    private String id;
     private boolean editItem, addItem, favourited;
 
     @Override
@@ -41,6 +49,8 @@ public class AddEditActivity extends AppCompatActivity {
         addItem = false;
 
         //Initializing EditTexts and attaching a Textwatcher
+        editImage = findViewById(R.id.editImageButton);
+
         urlInput = findViewById(R.id.urlInput);
         urlInput.addTextChangedListener(watcher);
 
@@ -162,8 +172,10 @@ public class AddEditActivity extends AppCompatActivity {
     }
 
     public void addItemToList(){
-        WishlistItem testItem = new WishlistItem(price,brand,name,url);
+        WishlistItem testItem = new WishlistItem(price,brand,name,url,this);
         testItem.setMainTag(tag);
+        if(id != null)
+            testItem.setImage(id);
         Intent testIntent = new Intent();
         testIntent.putExtra("item",testItem);
         setResult(-1,testIntent);
@@ -171,13 +183,22 @@ public class AddEditActivity extends AppCompatActivity {
     }
 
     public void editItemInList(){
-        WishlistItem wishlistItem = new WishlistItem(price,brand,name,url);
+        WishlistItem wishlistItem = new WishlistItem(price,brand,name,url,this);
         wishlistItem.setMainTag(tag);
+        if(id != null)
+            wishlistItem.setImage(id);
         wishlistItem.setWishID(wishItem.getWishID());
         Intent returnIntent = new Intent();
         returnIntent.putExtra("item",wishlistItem);
         setResult(1,returnIntent);
         finish();
+    }
+
+    public void changeImage(View view){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"),0);
     }
 
     //Method to populate the EditText fields if being used to edit
@@ -192,6 +213,7 @@ public class AddEditActivity extends AppCompatActivity {
         itemBrand.setText(wishItem.getBrand());
         itemPrice.setText(String.valueOf(wishItem.getPrice()));
         itemTag.setText(wishItem.getMainTag());
+        Picasso.get().load(wishItem.getImage()).into(imageView);
 
     }
 
@@ -204,6 +226,17 @@ public class AddEditActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(resultCode == RESULT_OK){
+            Uri filePath = data.getData();
+            String path = filePath.toString();
+            id = path;
+            Picasso.get().load(path).into(imageView);
+            addItem = true;
+        }
+    }
     //Textwatcher for EditText fields
     private TextWatcher watcher = new TextWatcher() {
         @Override

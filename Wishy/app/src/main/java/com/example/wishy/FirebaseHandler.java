@@ -50,7 +50,7 @@ public class FirebaseHandler {
         });
 
         if(returnItem == null){
-            returnItem = new WishlistItem(0,"Null","Null","Null");
+            //returnItem = new WishlistItem(0,"Null","Null","Null");
         }
 
         return returnItem;

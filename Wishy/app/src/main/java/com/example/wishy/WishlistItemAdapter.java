@@ -3,6 +3,7 @@ package com.example.wishy;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.ImageDecoder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -85,11 +88,11 @@ public class WishlistItemAdapter extends ArrayAdapter<WishlistItem> {
             }
         });
 
-        price.setText("$"+wishItem.getPrice());
-        brand.setText(wishItem.getBrand() + ": ");
-        name.setText(wishItem.getName());
+        name.setText(wishItem.getName()+ ": ");
+        brand.setText(wishItem.getBrand());
         tag.setText(wishItem.getMainTag());
-        itemImage.setImageResource(wishItem.getImageID());
+        price.setText("$"+String.valueOf(wishItem.getPrice()));
+        Picasso.get().load(wishItem.getImage()).into(itemImage);
         return convertView;
     }
 

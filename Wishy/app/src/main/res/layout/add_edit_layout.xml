@@ -201,6 +201,7 @@
     <Button
         android:id="@+id/editImageButton"
         style="?android:attr/borderlessButtonStyle"
+        android:onClick="changeImage"
         android:layout_width="80px"
         android:layout_height="80px"
         android:layout_marginTop="260dp"
@@ -213,7 +214,7 @@
         android:id="@+id/wishImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/editImageButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"

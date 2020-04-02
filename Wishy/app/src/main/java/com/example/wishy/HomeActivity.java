@@ -1,7 +1,10 @@
 package com.example.wishy;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -59,11 +62,10 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
         fHandler = new FirebaseHandler();
         fAuth = FirebaseAuth.getInstance();
 
-        WishlistItem one = new WishlistItem(34.99,"Hollister","The Denim Jacket","www.google.ca","TEST");
+        WishlistItem one = new WishlistItem(34.99,"Hollister","The Denim Jacket","www.google.ca","TEST",this);
         one.setFavourited(true);
-        one.setImageID(R.drawable.download);
-        WishlistItem two = new WishlistItem(80.00,"Asos","A Denim Jacket","www.google.ca");
-        WishlistItem three = new WishlistItem(99.99,"Holly","Denim Jacket","www.google.ca");
+        WishlistItem two = new WishlistItem(80.00,"Asos","A Denim Jacket","www.google.ca",this);
+        WishlistItem three = new WishlistItem(99.99,"Holly","Denim Jacket","www.google.ca",this);
         wishItems.add(three);
         wishItems.add(one);
         wishItems.add(two);
@@ -126,8 +128,6 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
 
-        Log.d("INFORMATION",resultCode + " INTENT: " + data);
-
         if(resultCode == 0){
             WishlistItem removeItem = null;
             WishlistItem item = data.getParcelableExtra("item");
@@ -154,6 +154,8 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
                 wishItems.remove(removeItem);
                 wishItems.add(item);
             }
+            Log.d("IMAGEID",String.valueOf(R.drawable.test_image));
+            Log.d("IMAGEID",String.valueOf(item.getImage()));
             wishItems = wishSorter.sortSelector(sortingBy,wishItems);
             wishAdapter.notifyDataSetChanged();
         }

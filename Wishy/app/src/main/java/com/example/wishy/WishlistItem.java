@@ -1,11 +1,18 @@
 package com.example.wishy;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -16,47 +23,52 @@ public class WishlistItem implements Parcelable {
 
     private double price;
     private String brand, name, mainTag, url, wishID;
-    private int imageID;
+    private String image;
     private boolean favourited;
+    private Context mContext;
 
-    public WishlistItem(double p, String b, String n, String u, String t, int i){
+    public WishlistItem(double p, String b, String n, String u, String t, Context c, String i){
         price = p;
         brand = b;
         name = n;
-        imageID = i;
+        image = i;
         favourited = false;
         mainTag = t;
         wishID = UUID.randomUUID().toString();
         url = u;
+        mContext = c;
     }
 
-    public WishlistItem(double p, String b, String n, String u, int i){
+    public WishlistItem(double p, String b, String n, String u,Context c,String i){
         price = p;
         brand = b;
         name = n;
-        imageID = i;
+        image = i;
         favourited = false;
         wishID = UUID.randomUUID().toString();
         url = u;
         mainTag = "";
+        mContext = c;
     }
 
-    public WishlistItem(double p, String b, String n, String u, String t){
+    public WishlistItem(double p, String b, String n, String u, String t, Context c){
         price = p;
         brand = b;
         name = n;
         mainTag = t;
-        imageID = R.drawable.test_image;
         favourited = false;
         wishID = UUID.randomUUID().toString();
         url = u;
+        mContext = c;
+        image = "content://com.android.providers.downloads.documents/document/raw%3A%2Fstorage%2Femulated%2F0%2FDownload%2Ftest_image.png";
     }
 
-    public WishlistItem(double p, String b, String n, String u){
+    public WishlistItem(double p, String b, String n, String u, Context c){
         price = p;
         brand = b;
         name = n;
-        imageID = R.drawable.test_image;
+        mContext = c;
+        image = "content://com.android.providers.downloads.documents/document/raw%3A%2Fstorage%2Femulated%2F0%2FDownload%2Ftest_image.png";
         favourited = false;
         wishID = UUID.randomUUID().toString();
         url = u;
@@ -70,7 +82,7 @@ public class WishlistItem implements Parcelable {
         mainTag = in.readString();
         url = in.readString();
         wishID = in.readString();
-        imageID = in.readInt();
+        image = in.readString();
         favourited = in.readByte() != 0;
     }
 
@@ -110,12 +122,12 @@ public class WishlistItem implements Parcelable {
         name = n;
     }
 
-    public int getImageID(){
-        return imageID;
+    public String getImage(){
+        return image;
     }
 
-    public void setImageID(int i){
-        imageID = i;
+    public void setImage(String i){
+        image = i;
     }
 
     public String getMainTag(){
@@ -163,7 +175,7 @@ public class WishlistItem implements Parcelable {
         dest.writeString(mainTag);
         dest.writeString(url);
         dest.writeString(wishID);
-        dest.writeInt(imageID);
+        dest.writeString(image);
         dest.writeByte((byte) (favourited ? 1 : 0));
     }
 }
